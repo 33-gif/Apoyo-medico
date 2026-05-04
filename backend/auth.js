@@ -4,7 +4,9 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const SECRET = "sistema_clinico_secreto";
+require("dotenv").config();
+
+const SECRET = process.env.JWT_SECRET || "sistema_clinico_secreto";
 
 
 // REGISTRO
@@ -13,24 +15,29 @@ router.post("/register", async (req, res) => {
     const { nombre, email, password, rol } = req.body;
 
     const hash = await bcrypt.hash(password, 10);
-    
+
     await pool.query(
       "INSERT INTO usuarios(nombre,email,password,rol) VALUES($1,$2,$3,$4)",
       [nombre, email, hash, rol]
     );
 
-    res.json({ mensaje: "Usuario creado correctamente" });
+    res.json({
+      mensaje: "Usuario creado correctamente"
+    });
 
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Error registrando usuario" });
+    console.error(error);
+    res.status(500).json({
+      error: "Error registrando usuario"
+    });
   }
 });
 
 
-// LOGIN
+// LOGIN JWT
 router.post("/login", async (req, res) => {
   try {
+
     const { email, password } = req.body;
 
     const result = await pool.query(
@@ -39,19 +46,30 @@ router.post("/login", async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.status(401).json({ error: "Usuario no existe" });
+      return res.status(401).json({
+        error: "Usuario no existe"
+      });
     }
 
-    const user = result.rows[0];
+    const usuario = result.rows[0];
 
-    const valido = await bcrypt.compare(password, user.password);
+    const valido = await bcrypt.compare(
+      password,
+      usuario.password
+    );
 
     if (!valido) {
-      return res.status(401).json({ error: "Password incorrecto" });
+      return res.status(401).json({
+        error: "Contraseña incorrecta"
+      });
     }
 
     const token = jwt.sign(
-      { id: user.id, rol: user.rol },
+      {
+        id: usuario.id,
+        rol: usuario.rol,
+        email: usuario.email
+      },
       SECRET,
       { expiresIn: "8h" }
     );
@@ -62,8 +80,10 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Error login" });
+    console.error(error);
+    res.status(500).json({
+      error: "Error login"
+    });
   }
 });
 
