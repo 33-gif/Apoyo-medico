@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Responsive - Sistema Clínico</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .test-section h3 {
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        .screen-info {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #10b981;
+        }
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .test-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 1000;
+        }
+        .test-modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-section">
+            <h3>🧪 Test de Diseño Responsivo</h3>
+            <div class="screen-info" id="screenInfo">
+                Cargando información de pantalla...
+            </div>
+            <div class="test-buttons">
+                <button class="btn-primary" onclick="testModal()">Abrir Modal</button>
+                <button class="btn-primary" onclick="testSidebar()">Toggle Sidebar</button>
+                <button class="btn-danger" onclick="location.href='dashboard.html'">Ir al Dashboard</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📱 Breakpoints del Sistema</h3>
+            <ul style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                <li><strong>Móvil:</strong> < 768px - Menú hamburguesa, layout vertical</li>
+                <li><strong>Tablet:</strong> 768px - 1024px - Sidebar lateral, layout horizontal</li>
+                <li><strong>Desktop:</strong> > 1024px - Layout completo optimizado</li>
+                <li><strong>Large Desktop:</strong> > 1440px - Espacio extra amplio</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🎨 Características de UI</h3>
+            <ul style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                <li>✅ Tema oscuro moderno con gradientes</li>
+                <li>✅ Animaciones y transiciones suaves</li>
+                <li>✅ Modales con backdrop blur</li>
+                <li>✅ Botones con hover effects</li>
+                <li>✅ Tablas scrollables en móviles</li>
+                <li>✅ Soporte para accesibilidad</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div id="testModal" class="test-modal">
+        <div class="test-modal-content">
+            <h2 style="color: #10b981; margin-bottom: 1rem;">Modal de Prueba</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 1.5rem;">
+                Este modal se adapta automáticamente al tamaño de pantalla.
+                En móviles ocupa casi toda la pantalla, en desktop es más compacto.
+            </p>
+            <div class="modal-buttons">
+                <button class="btn-primary" onclick="closeTestModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Información de pantalla en tiempo real
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const devicePixelRatio = window.devicePixelRatio || 1;
+
+            let breakpoint = 'Móvil';
+            if (width >= 1440) breakpoint = 'Large Desktop';
+            else if (width >= 1024) breakpoint = 'Desktop';
+            else if (width >= 768) breakpoint = 'Tablet';
+
+            document.getElementById('screenInfo').innerHTML = `
+                <strong>Resolución:</strong> ${width} × ${height}px<br>
+                <strong>Breakpoint:</strong> ${breakpoint}<br>
+                <strong>Device Pixel Ratio:</strong> ${devicePixelRatio}<br>
+                <strong>Touch:</strong> ${('ontouchstart' in window) ? 'Sí' : 'No'}
+            `;
+        }
+
+        // Funciones de test
+        function testModal() {
+            document.getElementById('testModal').style.display = 'flex';
+        }
+
+        function closeTestModal() {
+            document.getElementById('testModal').style.display = 'none';
+        }
+
+        function testSidebar() {
+            // Solo funciona si estamos en el dashboard
+            if (window.location.pathname.includes('dashboard.html')) {
+                toggleMenu();
+            } else {
+                alert('Esta función solo funciona en el dashboard');
+            }
+        }
+
+        // Actualizar info al cargar y redimensionar
+        window.addEventListener('load', updateScreenInfo);
+        window.addEventListener('resize', updateScreenInfo);
+
+        // Cerrar modal al hacer click fuera
+        document.getElementById('testModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTestModal();
+            }
+        });
+    </script>
+</body>
+</html>
