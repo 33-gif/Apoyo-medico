@@ -4,9 +4,7 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-require("dotenv").config();
-
-const SECRET = process.env.JWT_SECRET || "sistema_clinico_secreto";
+const SECRET = "sistema_clinico_secreto";
 
 
 // REGISTRO
@@ -21,23 +19,18 @@ router.post("/register", async (req, res) => {
       [nombre, email, hash, rol]
     );
 
-    res.json({
-      mensaje: "Usuario creado correctamente"
-    });
+    res.json({ mensaje: "Usuario creado correctamente" });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Error registrando usuario"
-    });
+    console.log(error);
+    res.status(500).json({ error: "Error registrando usuario" });
   }
 });
 
 
-// LOGIN JWT
+// LOGIN
 router.post("/login", async (req, res) => {
   try {
-
     const { email, password } = req.body;
 
     const result = await pool.query(
@@ -46,30 +39,19 @@ router.post("/login", async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.status(401).json({
-        error: "Usuario no existe"
-      });
+      return res.status(401).json({ error: "Usuario no existe" });
     }
 
-    const usuario = result.rows[0];
+    const user = result.rows[0];
 
-    const valido = await bcrypt.compare(
-      password,
-      usuario.password
-    );
+    const valido = await bcrypt.compare(password, user.password);
 
     if (!valido) {
-      return res.status(401).json({
-        error: "Contraseña incorrecta"
-      });
+      return res.status(401).json({ error: "Password incorrecto" });
     }
 
     const token = jwt.sign(
-      {
-        id: usuario.id,
-        rol: usuario.rol,
-        email: usuario.email
-      },
+      { id: user.id, rol: user.rol },
       SECRET,
       { expiresIn: "8h" }
     );
@@ -80,10 +62,8 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Error login"
-    });
+    console.log(error);
+    res.status(500).json({ error: "Error login" });
   }
 });
 

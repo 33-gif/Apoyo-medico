@@ -2,13 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 const authRoutes = require("./auth");
-const verificarToken = require("./middleware");
-
-const app = express();
-
-/* ==============================
-   CONFIGURACIÓN CORS (IMPORTANTE)
-============================== */
 app.use(cors({
   origin: "*", // desarrollo
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -19,24 +12,27 @@ app.use(express.json());
 
 /* ==============================
    RUTAS DE AUTENTICACIÓN
-============================== */
 app.use("/api", authRoutes);
 
 /* ==============================
    TEST DE SERVIDOR
-============================== */
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+
+// RUTAS LOGIN
+app.use("/api", authRoutes);
+
+
+// Ruta prueba PostgreSQL
 app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");
     res.json(result.rows[0]);
   } catch (error) {
-    res.status(500).json({ error: "Error en base de datos" });
-  }
-});
-
-/* ==============================
-   PERFIL PROTEGIDO
-============================== */
 app.get("/api/perfil", verificarToken, (req, res) => {
   res.json({
     mensaje: "Ruta privada",
@@ -46,7 +42,6 @@ app.get("/api/perfil", verificarToken, (req, res) => {
 
 /* ==============================
    CRUD PACIENTES
-============================== */
 
 /* ➜ CREAR */
 app.post("/api/pacientes", verificarToken, async (req, res) => {
@@ -127,7 +122,6 @@ app.delete("/api/pacientes/:id", verificarToken, async (req, res) => {
 
 /* ==============================
    CRUD HISTORIAL CLÍNICO
-============================== */
 
 /* ➜ CREAR HISTORIAL */
 app.post("/api/historial", verificarToken, async (req, res) => {
@@ -178,7 +172,6 @@ app.get("/api/historial/:pacienteId", verificarToken, async (req, res) => {
 
 /* ==============================
    CRUD CITAS
-============================== */
 
 /* ➜ CREAR CITAS */
 app.post("/api/citas", verificarToken, async (req, res) => {
@@ -265,7 +258,13 @@ app.delete("/api/citas/:id", verificarToken, async (req, res) => {
 
 /* ==============================
    INICIAR SERVIDOR
-============================== */
 app.listen(3000, () => {
   console.log("🚀 Servidor activo en http://localhost:3000");
+    console.error(error);
+    res.status(500).json({ error: "Error en base de datos" });
+  }
+});
+
+app.listen(3000, () => {
+  console.log("Servidor activo en http://localhost:3000");
 });
