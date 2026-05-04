@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Clínico</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h2>🩺 Clínica</h2>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <button onclick="logout()">Cerrar sesión</button>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <h1>🏥 Sistema Clínico</h1>
+      <input id="buscador"
+             type="text"
+             placeholder="Buscar paciente..."
+             oninput="filtrarPacientes()">
+    </header>
+
+    <!-- TABS DE NAVEGACIÓN -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('pacientes')">👥 Pacientes</button>
+      <button class="tab-btn" onclick="switchTab('estadisticas')">📊 Estadísticas</button>
+      <button class="tab-btn" onclick="switchTab('citas')">📅 Citas</button>
+      <button class="tab-btn" onclick="switchTab('busqueda')">🔍 Búsqueda Avanzada</button>
+    </div>
+
+    <!-- TAB: PACIENTES -->
+    <div id="tab-pacientes" class="tab-content active">
+      <section class="acciones">
+        <button class="btn-primary" onclick="abrirFormulario()">
+          + Nuevo Paciente
+        </button>
+        <button class="btn-primary" onclick="exportarPacientes()">
+          📥 Exportar Excel
+        </button>
+        <button class="btn-primary" onclick="exportarPDF()">
+          📄 Exportar PDF
+        </button>
+      </section>
+
+      <section class="tabla-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Documento</th>
+              <th>Edad</th>
+              <th>Sexo</th>
+              <th>Diagnóstico</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaPacientes"></tbody>
+        </table>
+      </section>
+
+      <div id="paginacion" class="paginacion"></div>
+    </div>
+
+    <!-- TAB: ESTADÍSTICAS -->
+    <div id="tab-estadisticas" class="tab-content">
+      <section class="estadisticas-container">
+        <div class="stat-card">
+          <div class="stat-number" id="totalPacientes">0</div>
+          <div class="stat-label">Total Pacientes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalHombres">0</div>
+          <div class="stat-label">Hombres</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalMujeres">0</div>
+          <div class="stat-label">Mujeres</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="edadPromedio">0</div>
+          <div class="stat-label">Edad Promedio</div>
+        </div>
+      </section>
+
+      <section class="charts-container">
+        <div class="chart-wrapper">
+          <h3>Distribución por Sexo</h3>
+          <div id="chartSexo" style="height: 300px;">Cargando...</div>
+        </div>
+        <div class="chart-wrapper">
+          <h3>Distribución por Edad</h3>
+          <div id="chartEdad" style="height: 300px;">Cargando...</div>
+        </div>
+        <div class="chart-wrapper">
+          <h3>Top Diagnósticos</h3>
+          <div id="chartDiagnostico" style="height: 300px;">Cargando...</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB: CITAS -->
+    <div id="tab-citas" class="tab-content">
+      <section class="acciones">
+        <button class="btn-primary" onclick="abrirFormularioCita()">
+          + Nueva Cita
+        </button>
+      </section>
+
+      <div class="citas-container">
+        <div id="citasLista" class="citas-list">
+          Cargando citas...
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: BÚSQUEDA AVANZADA -->
+    <div id="tab-busqueda" class="tab-content">
+      <section class="filtros-container">
+        <h3>Filtros de Búsqueda</h3>
+        <div class="filtros-grid">
+          <div>
+            <label>Por Nombre:</label>
+            <input type="text" id="filtroNombre" placeholder="Nombre del paciente">
+          </div>
+          <div>
+            <label>Por Sexo:</label>
+            <select id="filtroSexo">
+              <option value="">-- Todos --</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+          <div>
+            <label>Edad Mínima:</label>
+            <input type="number" id="filtroEdadMin" placeholder="Mínima" min="0" max="120">
+          </div>
+          <div>
+            <label>Edad Máxima:</label>
+            <input type="number" id="filtroEdadMax" placeholder="Máxima" min="0" max="120">
+          </div>
+          <div>
+            <label>Por Diagnóstico:</label>
+            <input type="text" id="filtroDiagnostico" placeholder="Diagnóstico">
+          </div>
+          <div style="align-self: flex-end;">
+            <button class="btn-primary" onclick="aplicarFiltros()">🔍 Buscar</button>
+            <button class="btn-primary" onclick="limpiarFiltros()" style="background: #6b7280;">Limpiar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tabla-container" style="margin-top: 2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Documento</th>
+              <th>Edad</th>
+              <th>Sexo</th>
+              <th>Diagnóstico</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaResultados"></tbody>
+        </table>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL PACIENTE -->
+<div id="modalPaciente" class="modal">
+  <div class="modal-content">
+
+    <h2 id="tituloModal">Nuevo Paciente</h2>
+
+    <input id="nombre" placeholder="Nombre">
+    <input id="documento" placeholder="Documento">
+    <input id="edad" type="number" placeholder="Edad">
+    <input id="sexo" placeholder="Sexo">
+    <input id="diagnostico" placeholder="Diagnóstico">
+
+    <div class="modal-buttons">
+      <button class="btn-primary" onclick="guardarPaciente()">Guardar</button>
+      <button class="btn-danger" onclick="cerrarModal()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL HISTORIAL -->
+<div id="modalHistorial" class="modal">
+  <div class="modal-content">
+
+    <h2>Historial Clínico</h2>
+
+    <input type="date" id="fecha">
+    <input type="text" id="sintomas" placeholder="Síntomas">
+    <input type="text" id="diagnosticoHist" placeholder="Diagnóstico">
+    <input type="text" id="tratamiento" placeholder="Tratamiento">
+    <input type="text" id="paciente" placeholder="Nombre del Paciente" readonly>
+
+    <div class="modal-buttons">
+      <button class="btn-primary" id="guardarHistorial" onclick="guardarHistorial()">Guardar</button>
+      <button class="btn-danger" id="cerrarHistorialBtn" onclick="cerrarHistorial()">Cerrar</button>
+    </div>
+
+    <div id="listaHistorial"></div>
+
+  </div>
+</div>
+
+<!-- MODAL CITAS -->
+<div id="modalCitas" class="modal">
+  <div class="modal-content">
+
+    <h2>Nueva Cita Médica</h2>
+
+    <select id="citaPaciente">
+      <option value="">-- Seleccionar Paciente --</option>
+    </select>
+
+    <input type="date" id="citaFecha">
+    <input type="time" id="citaHora">
+    <input type="text" id="citaMotivo" placeholder="Motivo de la cita">
+    <textarea id="citaNota" placeholder="Notas adicionales" style="resize: vertical; min-height: 80px;"></textarea>
+
+    <div class="modal-buttons">
+      <button class="btn-primary" onclick="guardarCita()">Guardar</button>
+      <button class="btn-danger" onclick="cerrarModalCitas()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pacientes.js"></script>
+<script src="js/historial.js"></script>
+<script src="js/estadisticas.js"></script>
+<script src="js/citas.js"></script>
+<script src="js/dashboard.js"></script>
+
+
+</body>
+</html>
