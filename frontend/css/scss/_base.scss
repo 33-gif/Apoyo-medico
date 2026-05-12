@@ -1,0 +1,102 @@
+// =====================================================
+// ESTILOS BASE
+// =====================================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @include gradient-bg();
+  color: $text;
+  min-height: 100vh;
+  font-size: font-size(base);
+  line-height: 1.5;
+
+  @include reduced-motion;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-weight: font-weight(bold);
+  line-height: 1.2;
+}
+
+h1 { font-size: font-size(5xl); }
+h2 { font-size: font-size(4xl); }
+h3 { font-size: font-size(3xl); }
+h4 { font-size: font-size(2xl); }
+h5 { font-size: font-size(xl); }
+h6 { font-size: font-size(lg); }
+
+// Links
+a {
+  color: color(primary);
+  text-decoration: none;
+  transition: map-get($transitions, fast);
+
+  &:hover {
+    color: color(primary-dark);
+  }
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color(primary);
+  border-radius: radius(sm);
+
+  &:hover {
+    background: color(primary-dark);
+  }
+}
+
+// Selection color
+::selection {
+  background: color(primary);
+  color: $text;
+}
+
+::-moz-selection {
+  background: color(primary);
+  color: $text;
+}
+
+// Accessibility
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  @include focus-outline;
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .modal {
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  .modal-content {
+    border: 2px solid $text;
+  }
+
+  input,
+  button {
+    border-width: 2px;
+  }
+}

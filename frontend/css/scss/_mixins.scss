@@ -1,0 +1,185 @@
+// =====================================================
+// MIXINS REUTILIZABLES
+// =====================================================
+
+// Responsive queries
+@mixin media-tablet {
+  @media (min-width: breakpoint(tablet)) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media (min-width: breakpoint(desktop)) {
+    @content;
+  }
+}
+
+@mixin media-large {
+  @media (min-width: breakpoint(large)) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: breakpoint(tablet) - 1px) {
+    @content;
+  }
+}
+
+@mixin media-small-mobile {
+  @media (max-width: breakpoint(mobile)) {
+    @content;
+  }
+}
+
+// Flexbox helpers
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Grid helpers
+@mixin grid-auto-fit($min: 200px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+}
+
+@mixin grid-auto-fill($min: 200px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+}
+
+// Button styles
+@mixin button-base {
+  border: none;
+  cursor: pointer;
+  font-weight: font-weight(semibold);
+  transition: map-get($transitions, default);
+  border-radius: radius(lg);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@mixin button-gradient($color-start, $color-end, $shadow-color) {
+  background: linear-gradient(135deg, $color-start 0%, $color-end 100%);
+  color: $text;
+  box-shadow: 0 4px 15px rgba($shadow-color, 0.2);
+
+  &:hover {
+    box-shadow: 0 8px 25px rgba($shadow-color, 0.3);
+  }
+}
+
+// Input styles
+@mixin input-base {
+  border: 2px solid $border-color;
+  border-radius: radius(lg);
+  background: rgba(255, 255, 255, 0.05);
+  color: $text;
+  transition: map-get($transitions, default);
+  font-size: font-size(base);
+  font-family: $font-family;
+
+  &:focus {
+    outline: none;
+    border-color: $border-focus;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-light;
+  }
+}
+
+// Card styles
+@mixin card-base {
+  background: map-get($backgrounds, card);
+  border: 1px solid $border-color;
+  border-radius: radius(xl);
+  padding: spacing(xl);
+  box-shadow: shadow(md);
+  transition: map-get($transitions, default);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: shadow(hover);
+  }
+}
+
+// Gradient background
+@mixin gradient-bg($start: #0f172a, $end: #1e293b) {
+  background: linear-gradient(135deg, $start 0%, $end 100%);
+}
+
+// Text truncate
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Pseudo element positioning
+@mixin pseudo($content: '') {
+  content: $content;
+  position: absolute;
+}
+
+// Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// Center absolutely positioned element
+@mixin center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Smooth transitions
+@mixin smooth-transition($properties: all, $duration: 0.3s, $timing: ease) {
+  transition: $properties $duration $timing;
+}
+
+// Transform on hover
+@mixin hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: shadow(hover);
+  }
+}
+
+// Accessibility - focus styles
+@mixin focus-outline {
+  outline: 2px solid color(primary);
+  outline-offset: 2px;
+}
+
+// Reduced motion support
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

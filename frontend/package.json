@@ -1,0 +1,25 @@
+{
+  "name": "sistema-clinico-frontend",
+  "version": "1.0.0",
+  "description": "Frontend del Sistema Clínico con SCSS modular",
+  "main": "app.js",
+  "scripts": {
+    "build-css": "sass css/style.scss css/style.css --style=compressed",
+    "watch-css": "sass --watch css/style.scss css/style.css --style=expanded",
+    "dev": "npm run watch-css",
+    "build": "npm run build-css",
+    "start": "npm run watch-css"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5"
+  },
+  "keywords": [
+    "clinico",
+    "sistema",
+    "frontend",
+    "scss",
+    "modular"
+  ],
+  "author": "Sistema Clínico",
+  "license": "MIT"
+}

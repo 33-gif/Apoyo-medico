@@ -1,0 +1,177 @@
+// =====================================================
+// TABLAS
+// =====================================================
+
+.tabla-container {
+  margin-top: spacing(lg);
+  border-radius: radius(xl);
+  overflow: hidden;
+  box-shadow: shadow(default);
+  background: map-get($backgrounds, secondary);
+
+  @include media-mobile {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: map-get($backgrounds, secondary);
+  font-size: font-size(sm);
+
+  @include media-tablet {
+    font-size: font-size(base);
+  }
+
+  @include media-mobile {
+    min-width: 600px;
+    font-size: font-size(xs);
+  }
+
+  @include media-small-mobile {
+    min-width: 500px;
+    font-size: 0.75rem;
+  }
+}
+
+th {
+  background: linear-gradient(135deg, color(primary) 0%, color(primary-dark) 100%);
+  color: $text;
+  padding: spacing(lg) spacing(sm);
+  text-align: center;
+  font-weight: font-weight(semibold);
+  font-size: font-size(xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  @include media-tablet {
+    padding: spacing(xl) spacing(lg);
+    font-size: font-size(sm);
+  }
+
+  @include media-mobile {
+    padding: spacing(md) spacing(sm);
+    font-size: 0.75rem;
+  }
+
+  @include media-small-mobile {
+    padding: spacing(sm) spacing(xs);
+    font-size: 0.7rem;
+  }
+}
+
+td {
+  padding: spacing(md) spacing(sm);
+  border-bottom: 1px solid $border-color;
+  text-align: center;
+  color: $text-muted;
+
+  @include media-tablet {
+    padding: spacing(lg) spacing(lg);
+  }
+
+  @include media-mobile {
+    padding: spacing(sm) spacing(xs);
+    white-space: nowrap;
+  }
+
+  @include media-small-mobile {
+    padding: 0.4rem 0.2rem;
+  }
+}
+
+tr {
+  &:hover {
+    background: rgba(color(primary), 0.1);
+    transition: background 0.3s ease;
+  }
+
+  &:last-child td {
+    border-bottom: none;
+  }
+}
+
+// Botones en tabla
+td button {
+  padding: spacing(xs) spacing(sm);
+  margin: 0 spacing(xs);
+  border: none;
+  border-radius: radius(sm);
+  cursor: pointer;
+  font-size: font-size(xs);
+  transition: map-get($transitions, default);
+  min-width: 32px;
+
+  @include media-tablet {
+    padding: spacing(sm) spacing(lg);
+    font-size: font-size(sm);
+    min-width: 40px;
+  }
+
+  @include media-mobile {
+    padding: spacing(xs) spacing(sm);
+    font-size: 0.7rem;
+    min-width: 28px;
+    margin: 0 0.1rem;
+  }
+
+  @include media-small-mobile {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.65rem;
+    min-width: 24px;
+  }
+
+  &:first-child {
+    background: color(accent);
+
+    &:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+  }
+
+  &:nth-child(2) {
+    background: color(danger);
+
+    &:hover {
+      background: color(danger-dark);
+      transform: translateY(-1px);
+    }
+  }
+
+  &:last-child {
+    background: color(warning);
+
+    &:hover {
+      background: color(warning-dark);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Badge styling
+.badge {
+  display: inline-block;
+  padding: spacing(xs) spacing(md);
+  border-radius: 20px;
+  font-size: font-size(xs);
+  font-weight: font-weight(semibold);
+  color: $text;
+
+  &.badge-admin {
+    background: rgba(color(accent), 0.3);
+    color: color(accent);
+  }
+
+  &.badge-doctor {
+    background: rgba(color(primary), 0.3);
+    color: color(primary);
+  }
+
+  &.badge-recepcionista {
+    background: rgba(color(warning), 0.3);
+    color: color(warning);
+  }
+}

@@ -1,0 +1,265 @@
+// =====================================================
+// COMPONENTES Y TARJETAS
+// =====================================================
+
+// Cita Cards
+.cita-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 2px solid color(primary);
+  border-radius: radius(xl);
+  padding: spacing(lg);
+  margin-bottom: spacing(lg);
+  cursor: pointer;
+  transition: map-get($transitions, default);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: shadow(lg);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  }
+
+  h4 {
+    color: color(primary);
+    margin-bottom: spacing(sm);
+    font-size: font-size(lg);
+  }
+
+  p {
+    color: $text-muted;
+    font-size: font-size(sm);
+    margin: spacing(xs) 0;
+    display: flex;
+    align-items: center;
+    gap: spacing(sm);
+
+    strong {
+      color: $text;
+    }
+  }
+
+  .cita-hora {
+    background: color(primary);
+    color: $text;
+    padding: spacing(sm) spacing(md);
+    border-radius: radius(md);
+    display: inline-block;
+    font-weight: font-weight(semibold);
+    margin-top: spacing(md);
+  }
+
+  @include media-mobile {
+    padding: spacing(md);
+
+    h4 {
+      font-size: font-size(base);
+    }
+
+    p {
+      font-size: font-size(xs);
+    }
+  }
+}
+
+// Stat Cards
+.stat-card {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+  border: 2px solid color(accent);
+  border-radius: radius(xl);
+  padding: spacing(lg);
+  text-align: center;
+  transition: map-get($transitions, default);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: shadow(default);
+  }
+
+  .stat-icon {
+    font-size: font-size(5xl);
+    margin-bottom: spacing(md);
+  }
+
+  .stat-number {
+    font-size: font-size(3xl);
+    font-weight: font-weight(bold);
+    color: color(accent);
+    margin-bottom: spacing(sm);
+  }
+
+  .stat-label {
+    font-size: font-size(sm);
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @include media-mobile {
+    padding: spacing(md);
+
+    .stat-icon {
+      font-size: font-size(4xl);
+    }
+
+    .stat-number {
+      font-size: font-size(2xl);
+    }
+  }
+
+  @include media-small-mobile {
+    padding: spacing(sm);
+
+    .stat-icon {
+      font-size: font-size(3xl);
+    }
+
+    .stat-number {
+      font-size: font-size(xl);
+    }
+  }
+}
+
+// Stats grid
+.estadisticas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: spacing(lg);
+  margin: spacing(2xl) 0;
+
+  @include media-tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: spacing(xl);
+  }
+
+  @include media-mobile {
+    grid-template-columns: 1fr;
+    gap: spacing(lg);
+  }
+}
+
+// Chart wrapper
+.chart-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid $border-color;
+  border-radius: radius(xl);
+  padding: spacing(2xl);
+  margin-bottom: spacing(2xl);
+
+  h3 {
+    margin-bottom: spacing(lg);
+    color: color(primary);
+    font-size: font-size(xl);
+  }
+
+  canvas {
+    max-height: 300px;
+    margin: spacing(lg) 0;
+  }
+
+  @include media-mobile {
+    padding: spacing(lg);
+
+    h3 {
+      font-size: font-size(lg);
+    }
+
+    canvas {
+      max-height: 250px;
+    }
+  }
+
+  @include media-small-mobile {
+    padding: spacing(md);
+
+    h3 {
+      font-size: font-size(base);
+    }
+
+    canvas {
+      max-height: 200px;
+    }
+  }
+}
+
+// Paciente card
+.paciente-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border-color;
+  border-radius: radius(lg);
+  padding: spacing(lg);
+  transition: map-get($transitions, default);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: color(primary);
+  }
+
+  h4 {
+    color: $text;
+    margin-bottom: spacing(sm);
+    font-size: font-size(lg);
+  }
+
+  p {
+    color: $text-muted;
+    font-size: font-size(sm);
+    margin: spacing(xs) 0;
+  }
+
+  .paciente-id {
+    color: color(primary);
+    font-weight: font-weight(semibold);
+    font-size: font-size(xs);
+    text-transform: uppercase;
+    margin-top: spacing(md);
+  }
+
+  @include media-mobile {
+    padding: spacing(md);
+
+    h4 {
+      font-size: font-size(base);
+    }
+
+    p {
+      font-size: font-size(xs);
+    }
+  }
+}
+
+// Alert boxes
+.alert {
+  padding: spacing(lg);
+  border-radius: radius(lg);
+  margin-bottom: spacing(lg);
+  font-size: font-size(sm);
+  border-left: 4px solid;
+
+  &.alert-success {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: color(primary);
+    color: color(primary);
+  }
+
+  &.alert-error {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: color(danger);
+    color: color(danger);
+  }
+
+  &.alert-info {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: color(accent);
+    color: color(accent);
+  }
+
+  &.alert-warning {
+    background: rgba(251, 191, 36, 0.2);
+    border-color: color(warning);
+    color: color(warning);
+  }
+
+  @include media-mobile {
+    padding: spacing(md);
+    font-size: font-size(xs);
+  }
+}

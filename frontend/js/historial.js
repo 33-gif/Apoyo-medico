@@ -1,4 +1,11 @@
 // HISTORIAL MÉDICO 
+document.addEventListener("DOMContentLoaded", () => {
+  const modalHistorial = document.getElementById("modalHistorial");
+  if (modalHistorial) {
+    modalHistorial.style.display = "none";
+  }
+});
+
 async function guardarHistorial() {
   try {
     const fecha = document.getElementById("fecha").value;
@@ -38,7 +45,7 @@ async function guardarHistorial() {
         sintomas,
         diagnostico,
         tratamiento,
-        paciente_nombre: paciente
+        paciente_nombre: pacientes.find(p => p.id === window.pacienteActualId)?.nombre || "Desconocido"
       })
     });
 

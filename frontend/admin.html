@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración - Sistema Clínico</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>🩺 Clínica</h2>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="dashboard.html" class="menu-item">Dashboard</a>
+        <a href="admin.html" class="menu-item active">Administración</a>
+      </nav>
+      <button onclick="logout()" style="margin-top: auto;">Cerrar sesión</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1>⚙️ Administración del Sistema</h1>
+      </header>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchAdminTab('usuarios')">👤 Gestionar Usuarios</button>
+      </div>
+
+      <!-- TAB: USUARIOS -->
+      <div id="tab-usuarios" class="tab-content active">
+        <section class="acciones">
+          <button class="btn-primary" onclick="abrirFormularioUsuario()">
+            + Nuevo Usuario
+          </button>
+        </section>
+
+        <section class="tabla-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaUsuarios"></tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL USUARIO -->
+  <div id="modalUsuario" class="modal">
+    <div class="modal-content">
+      <h2 id="tituloModalUsuario">Nuevo Usuario</h2>
+
+      <input id="usuarioNombre" placeholder="Nombre completo" required>
+      <input id="usuarioEmail" placeholder="Correo electrónico" type="email" required>
+      <input id="usuarioPassword" placeholder="Contraseña" type="password" required>
+
+      <label>Rol:</label>
+      <select id="usuarioRol" required>
+        <option value="recepcionista">Recepcionista</option>
+        <option value="doctor">Doctor</option>
+        <option value="admin">Administrador</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button class="btn-primary" onclick="guardarUsuario()">Guardar</button>
+        <button class="btn-danger" onclick="cerrarModalUsuario()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="services/apiService.js"></script>
+  <script src="services/authService.js"></script>
+  <script src="services/usuariosService.js"></script>
+  <script src="utils/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

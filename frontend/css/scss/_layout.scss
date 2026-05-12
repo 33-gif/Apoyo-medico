@@ -1,0 +1,232 @@
+// =====================================================
+// LAYOUT - ESTRUCTURA PRINCIPAL
+// =====================================================
+
+.container {
+  @include flex-column;
+  min-height: 100vh;
+
+  @include media-tablet {
+    flex-direction: row;
+    max-width: 100%;
+  }
+
+  @include media-desktop {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  @include media-large {
+    max-width: 1600px;
+  }
+}
+
+// Sidebar
+.sidebar {
+  width: 100%;
+  @include gradient-bg();
+  padding: spacing(xl);
+  @include flex-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  h2 {
+    font-size: font-size(xl);
+    font-weight: font-weight(bold);
+    color: color(primary);
+  }
+
+  button {
+    padding: spacing(sm) spacing(lg);
+    background: color(danger);
+    border: none;
+    border-radius: radius(md);
+    color: $text;
+    cursor: pointer;
+    font-size: font-size(sm);
+    transition: map-get($transitions, default);
+
+    &:hover {
+      background: color(danger-dark);
+      transform: translateY(-1px);
+    }
+  }
+
+  @include media-tablet {
+    width: 250px;
+    flex-shrink: 0;
+    @include flex-column;
+    justify-content: flex-start;
+    padding: spacing(2xl) spacing(xl);
+
+    h2 {
+      margin-bottom: spacing(2xl);
+      font-size: font-size(2xl);
+    }
+
+    button {
+      align-self: flex-start;
+      padding: spacing(md) spacing(xl);
+      font-size: font-size(base);
+    }
+  }
+
+  @include media-large {
+    width: 280px;
+  }
+}
+
+// Sidebar navigation
+#sidebarNav {
+  @include flex-column;
+  gap: spacing(md);
+
+  .menu-item {
+    padding: spacing(md) spacing(lg);
+    color: $text;
+    text-decoration: none;
+    border-radius: radius(md);
+    transition: map-get($transitions, default);
+
+    &:hover {
+      background: rgba(color(primary), 0.1);
+      color: color(primary);
+    }
+
+    &.active {
+      background: rgba(color(primary), 0.2);
+      color: color(primary);
+    }
+  }
+}
+
+// Menu toggle button
+.menu-toggle {
+  display: none;
+  background: color(primary);
+  border: none;
+  border-radius: radius(md);
+  color: $text;
+  font-size: font-size(lg);
+  padding: spacing(sm);
+  cursor: pointer;
+  transition: map-get($transitions, default);
+
+  &:hover {
+    background: color(primary-dark);
+  }
+
+  @include media-mobile {
+    display: block;
+  }
+}
+
+// Mobile menu styles
+.sidebar.menu-open {
+  @include media-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    flex-direction: column;
+    padding: spacing(lg);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+
+    h2 {
+      font-size: font-size(lg);
+      margin-bottom: spacing(2xl);
+    }
+
+    button:last-child {
+      display: block;
+      margin-top: auto;
+    }
+  }
+}
+
+// Main content
+.main {
+  flex: 1;
+  padding: spacing(lg);
+  max-width: 100%;
+  overflow-x: hidden;
+
+  @include media-tablet {
+    padding: spacing(2xl);
+  }
+
+  @include media-desktop {
+    padding: spacing(3xl);
+  }
+
+  @include media-mobile {
+    padding: spacing(sm);
+    margin-top: 60px;
+  }
+}
+
+// Topbar
+.topbar {
+  @include flex-column;
+  gap: spacing(lg);
+  margin-bottom: spacing(xl);
+
+  h1 {
+    font-size: font-size(3xl);
+    font-weight: font-weight(bold);
+    color: color(primary);
+    margin-bottom: spacing(sm);
+  }
+
+  #buscador {
+    padding: spacing(md) spacing(lg);
+    border: 2px solid $border-color;
+    border-radius: radius(xl);
+    background: map-get($backgrounds, secondary);
+    color: $text;
+    font-size: font-size(base);
+    transition: map-get($transitions, default);
+
+    &:focus {
+      outline: none;
+      border-color: color(primary);
+      background: map-get($backgrounds, secondary);
+    }
+
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+
+  @include media-tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      margin-bottom: 0;
+      font-size: font-size(4xl);
+    }
+
+    #buscador {
+      flex: 0 0 300px;
+    }
+  }
+
+  @include media-desktop {
+    h1 {
+      font-size: font-size(5xl);
+    }
+
+    #buscador {
+      flex: 0 0 400px;
+    }
+  }
+
+  @include media-mobile {
+    h1 {
+      font-size: font-size(2xl);
+    }
+  }
+}

@@ -1,0 +1,138 @@
+// =====================================================
+// BOTONES
+// =====================================================
+
+.btn {
+  @include button-base;
+
+  &:focus {
+    @include focus-outline;
+  }
+}
+
+.btn-primary {
+  @include button-gradient(color(primary), color(primary-dark), rgb(16, 185, 129));
+  padding: spacing(md) spacing(xl);
+  border-radius: radius(xl);
+  font-size: font-size(base);
+  font-weight: font-weight(semibold);
+  cursor: pointer;
+  transition: map-get($transitions, default);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+  }
+
+  @include media-mobile {
+    width: 100%;
+  }
+}
+
+.btn-danger {
+  @include button-gradient(color(danger), color(danger-dark), rgb(239, 68, 68));
+  color: $text;
+
+  &:hover {
+    background: linear-gradient(135deg, color(danger-dark) 0%, #b91c1c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+  }
+}
+
+.btn-warning {
+  background: color(warning);
+  color: $text;
+  @include button-base;
+
+  &:hover {
+    background: color(warning-dark);
+  }
+}
+
+.btn-accent {
+  background: color(accent);
+  color: $text;
+  @include button-base;
+
+  &:hover {
+    background: #2563eb;
+  }
+}
+
+.btn-small {
+  flex: 1;
+  padding: spacing(sm) spacing(lg);
+  border: none;
+  border-radius: radius(md);
+  background: color(primary);
+  color: $text;
+  font-weight: font-weight(semibold);
+  cursor: pointer;
+  transition: map-get($transitions, default);
+  font-size: font-size(sm);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+}
+
+// Acciones container
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing(lg);
+  margin-bottom: spacing(xl);
+
+  .btn-primary {
+    margin: 0;
+  }
+
+  @include media-mobile {
+    flex-direction: column;
+
+    .btn-primary {
+      width: 100%;
+    }
+  }
+}
+
+// Login button
+.login-box {
+  button {
+    width: 100%;
+    padding: spacing(lg);
+    background: linear-gradient(135deg, color(primary) 0%, color(primary-dark) 100%);
+    border: none;
+    border-radius: radius(xl);
+    color: $text;
+    font-size: font-size(lg);
+    font-weight: font-weight(semibold);
+    cursor: pointer;
+    transition: map-get($transitions, default);
+    margin-bottom: spacing(md);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    }
+  }
+}
+
+// Button utilities
+.flex {
+  display: flex;
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

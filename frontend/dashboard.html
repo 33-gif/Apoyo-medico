@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <title>Sistema Clínico</title>
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 </head>
-
+ 
 <body>
-
+ 
 <div class="container">
-
+ 
   <aside class="sidebar">
     <h2>🩺 Clínica</h2>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="sidebarNav"></nav>
     <button onclick="logout()">Cerrar sesión</button>
   </aside>
-
+ 
   <main class="main">
-
+ 
     <header class="topbar">
       <h1>🏥 Sistema Clínico</h1>
       <input id="buscador"
@@ -25,7 +27,7 @@
              placeholder="Buscar paciente..."
              oninput="filtrarPacientes()">
     </header>
-
+ 
     <!-- TABS DE NAVEGACIÓN -->
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('pacientes')">👥 Pacientes</button>
@@ -33,13 +35,19 @@
       <button class="tab-btn" onclick="switchTab('citas')">📅 Citas</button>
       <button class="tab-btn" onclick="switchTab('busqueda')">🔍 Búsqueda Avanzada</button>
     </div>
-
+ 
     <!-- TAB: PACIENTES -->
     <div id="tab-pacientes" class="tab-content active">
       <section class="acciones">
         <button class="btn-primary" onclick="abrirFormulario()">
           + Nuevo Paciente
         </button>
+        <!-- CORREGIDO: antes llamaba a mostrarCitas() que colisiona con la función
+             de renderizado en citas.js. Ahora cambia al tab de citas correctamente. -->
+        <button class="btn-primary" onclick="switchTab('citas')">
+          📅 Ver Citas
+        </button>
+ 
         <button class="btn-primary" onclick="exportarPacientes()">
           📥 Exportar Excel
         </button>
@@ -47,7 +55,7 @@
           📄 Exportar PDF
         </button>
       </section>
-
+ 
       <section class="tabla-container">
         <table>
           <thead>
@@ -64,10 +72,10 @@
           <tbody id="tablaPacientes"></tbody>
         </table>
       </section>
-
+ 
       <div id="paginacion" class="paginacion"></div>
     </div>
-
+ 
     <!-- TAB: ESTADÍSTICAS -->
     <div id="tab-estadisticas" class="tab-content">
       <section class="estadisticas-container">
@@ -88,7 +96,7 @@
           <div class="stat-label">Edad Promedio</div>
         </div>
       </section>
-
+ 
       <section class="charts-container">
         <div class="chart-wrapper">
           <h3>Distribución por Sexo</h3>
@@ -104,22 +112,24 @@
         </div>
       </section>
     </div>
-
+ 
     <!-- TAB: CITAS -->
     <div id="tab-citas" class="tab-content">
       <section class="acciones">
+        <!-- CORREGIDO: antes el nombre no existía en citas.js, ahora sí está definido -->
         <button class="btn-primary" onclick="abrirFormularioCita()">
           + Nueva Cita
         </button>
       </section>
-
-      <div class="citas-container">
-        <div id="citasLista" class="citas-list">
-          Cargando citas...
-        </div>
-      </div>
+ 
+        <div class="citas-container">
+          <div id="calendarioCitas"></div>
+             <div id="citasLista" class="citas-list">
+              Cargando citas...
+                </div>
+            </div>
     </div>
-
+ 
     <!-- TAB: BÚSQUEDA AVANZADA -->
     <div id="tab-busqueda" class="tab-content">
       <section class="filtros-container">
@@ -155,7 +165,7 @@
           </div>
         </div>
       </section>
-
+ 
       <section class="tabla-container" style="margin-top: 2rem;">
         <table>
           <thead>
@@ -173,77 +183,81 @@
         </table>
       </section>
     </div>
-
+ 
   </main>
 </div>
-
+ 
 <!-- MODAL PACIENTE -->
 <div id="modalPaciente" class="modal">
   <div class="modal-content">
-
+ 
     <h2 id="tituloModal">Nuevo Paciente</h2>
-
+ 
     <input id="nombre" placeholder="Nombre">
     <input id="documento" placeholder="Documento">
     <input id="edad" type="number" placeholder="Edad">
     <input id="sexo" placeholder="Sexo">
     <input id="diagnostico" placeholder="Diagnóstico">
-
+ 
     <div class="modal-buttons">
       <button class="btn-primary" onclick="guardarPaciente()">Guardar</button>
       <button class="btn-danger" onclick="cerrarModal()">Cancelar</button>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <!-- MODAL HISTORIAL -->
 <div id="modalHistorial" class="modal">
   <div class="modal-content">
-
+ 
     <h2>Historial Clínico</h2>
-
+ 
     <input type="date" id="fecha">
     <input type="text" id="sintomas" placeholder="Síntomas">
     <input type="text" id="diagnosticoHist" placeholder="Diagnóstico">
     <input type="text" id="tratamiento" placeholder="Tratamiento">
     <input type="text" id="paciente" placeholder="Nombre del Paciente" readonly>
-
+ 
     <div class="modal-buttons">
       <button class="btn-primary" id="guardarHistorial" onclick="guardarHistorial()">Guardar</button>
       <button class="btn-danger" id="cerrarHistorialBtn" onclick="cerrarHistorial()">Cerrar</button>
     </div>
-
+ 
     <div id="listaHistorial"></div>
-
+ 
   </div>
 </div>
-
+ 
 <!-- MODAL CITAS -->
 <div id="modalCitas" class="modal">
   <div class="modal-content">
-
+ 
     <h2>Nueva Cita Médica</h2>
-
+ 
     <select id="citaPaciente">
       <option value="">-- Seleccionar Paciente --</option>
     </select>
-
+ 
     <input type="date" id="citaFecha">
     <input type="time" id="citaHora">
     <input type="text" id="citaMotivo" placeholder="Motivo de la cita">
     <textarea id="citaNota" placeholder="Notas adicionales" style="resize: vertical; min-height: 80px;"></textarea>
-
+ 
     <div class="modal-buttons">
       <button class="btn-primary" onclick="guardarCita()">Guardar</button>
       <button class="btn-danger" onclick="cerrarModalCitas()">Cancelar</button>
     </div>
-
+ 
   </div>
 </div>
-
-<script src="js/api.js"></script>
-<script src="js/auth.js"></script>
+ 
+<script src="services/apiService.js"></script>
+<script src="services/authService.js"></script>
+<script src="services/pacientesService.js"></script>
+<script src="services/citasService.js"></script>
+<script src="services/historialService.js"></script>
+<script src="utils/auth.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/pacientes.js"></script>
 <script src="js/historial.js"></script>
@@ -251,6 +265,8 @@
 <script src="js/citas.js"></script>
 <script src="js/dashboard.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
+ 
 </body>
 </html>

@@ -1,10 +1,26 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-  verificarAuth(); // Verificar que esté autenticado
+  checkAuth(); // Verificar que esté autenticado
+  renderizarNavegacion(); // Renderizar menú según rol
   cargarPacientes(); // Cargar pacientes al abrir la página
   
   document.getElementById("buscador").addEventListener("input", filtrarPacientes);
 });
+
+function renderizarNavegacion() {
+  const nav = document.getElementById('sidebarNav');
+  const usuario = authService.getUser();
+  
+  let html = `
+    <a href="dashboard.html" class="menu-item">📊 Dashboard</a>
+  `;
+  
+  if (usuario && usuario.rol === 'admin') {
+    html += `<a href="admin.html" class="menu-item">⚙️ Administración</a>`;
+  }
+  
+  nav.innerHTML = html;
+}
 
 // GESTIÓN DE TABS
 function switchTab(tabName) {

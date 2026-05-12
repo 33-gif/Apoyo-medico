@@ -1,0 +1,26 @@
+// =====================================================
+// SISTEMA CLÍNICO - ARCHIVO PRINCIPAL DE ESTILOS
+// =====================================================
+
+// 1. VARIABLES GLOBALES
+@import 'scss/variables';
+
+// 2. MIXINS Y FUNCIONES
+@import 'scss/mixins';
+
+// 3. ESTILOS BASE
+@import 'scss/base';
+
+// 4. LAYOUT Y ESTRUCTURA
+@import 'scss/layout';
+
+// 5. COMPONENTES
+@import 'scss/buttons';
+@import 'scss/forms';
+@import 'scss/tables';
+@import 'scss/modals';
+@import 'scss/navigation';
+@import 'scss/components';
+
+// 6. PÁGINAS ESPECÍFICAS
+@import 'scss/calendar';

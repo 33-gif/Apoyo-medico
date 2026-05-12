@@ -18,13 +18,38 @@
 <p id="mensaje"></p>
 </div>
 
-
-<script src="js/auth.js"></script>
+<script src="services/authService.js"></script>
+<script src="utils/auth.js"></script>
 <script>
   // Verificar si ya está autenticado
   window.addEventListener('DOMContentLoaded', () => {
-    verificarAuthLogin();
+    checkAuthLogin();
   });
+
+  async function iniciarSesion() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+      showAlert('Complete todos los campos', 'error');
+      return;
+    }
+
+    const resultado = await authService.login(email, password);
+
+    if (resultado.success) {
+      showAlert('Bienvenido ' + resultado.usuario.nombre, 'success');
+      setTimeout(() => {
+        if (resultado.usuario.rol === 'admin') {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      }, 500);
+    } else {
+      showAlert(resultado.error, 'error');
+    }
+  }
 </script>
 </body>
 </html>

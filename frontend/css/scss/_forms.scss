@@ -1,0 +1,145 @@
+// =====================================================
+// FORMULARIOS E INPUTS
+// =====================================================
+
+input,
+textarea,
+select {
+  @include input-base;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+select {
+  option {
+    background: #1e293b;
+    color: $text;
+  }
+}
+
+// Inputs en modal
+.modal-content {
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: spacing(md);
+    margin-bottom: spacing(md);
+    border: 2px solid $border-color;
+    border-radius: radius(lg);
+    background: rgba(255, 255, 255, 0.05);
+    color: $text;
+    font-size: font-size(base);
+    font-family: inherit;
+    transition: map-get($transitions, default);
+
+    &:focus {
+      outline: none;
+      border-color: color(primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+}
+
+// Login box inputs
+.login-box {
+  input {
+    width: 100%;
+    padding: spacing(lg);
+    margin-bottom: spacing(md);
+    border: 2px solid transparent;
+    border-radius: radius(xl);
+    font-size: font-size(base);
+    background: rgba(255, 255, 255, 0.1);
+    color: $text;
+    transition: map-get($transitions, default);
+
+    &:focus {
+      outline: none;
+      border-color: color(primary);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+}
+
+// Filtros avanzados
+.filtros-container {
+  background: rgba(30, 41, 59, 0.8);
+  padding: spacing(2xl);
+  border-radius: radius(2xl);
+  margin-bottom: spacing(2xl);
+  border: 1px solid $border-color;
+
+  h3 {
+    color: color(primary);
+    margin-bottom: spacing(xl);
+    font-size: font-size(lg);
+  }
+}
+
+.filtros-grid {
+  @include grid-auto-fit(200px);
+  gap: spacing(lg);
+
+  > div {
+    @include flex-column;
+  }
+
+  label {
+    font-size: font-size(sm);
+    color: $text-muted;
+    margin-bottom: spacing(sm);
+    font-weight: font-weight(semibold);
+  }
+
+  input,
+  select {
+    padding: spacing(md);
+    border: 2px solid $border-color;
+    border-radius: radius(md);
+    background: rgba(255, 255, 255, 0.05);
+    color: $text;
+    font-size: font-size(sm);
+    transition: map-get($transitions, default);
+
+    &:focus {
+      outline: none;
+      border-color: color(primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  select {
+    option {
+      background: #1e293b;
+      color: $text;
+    }
+  }
+
+  @include media-mobile {
+    @include grid-auto-fit(150px);
+  }
+}
+
+// Label styling
+label {
+  display: block;
+  margin-bottom: spacing(md);
+  font-weight: font-weight(semibold);
+  color: $text-muted;
+}

@@ -1,0 +1,124 @@
+// =====================================================
+// VARIABLES GLOBALES
+// =====================================================
+
+// Colores
+$colors: (
+  primary: #10b981,
+  primary-dark: #059669,
+  primary-light: rgba(16, 185, 129, 0.1),
+  secondary: #1e293b,
+  secondary-dark: #0f172a,
+  accent: #3b82f6,
+  danger: #ef4444,
+  danger-dark: #dc2626,
+  warning: #f59e0b,
+  warning-dark: #d97706,
+);
+
+$text: white;
+$text-muted: rgba(255, 255, 255, 0.7);
+$text-light: rgba(255, 255, 255, 0.6);
+
+$backgrounds: (
+  primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%),
+  secondary: rgba(30, 41, 59, 0.8),
+  modal: linear-gradient(135deg, #1e293b 0%, #334155 100%),
+  card: rgba(30, 41, 59, 0.8),
+);
+
+$border-color: rgba(255, 255, 255, 0.1);
+$border-focus: #10b981;
+
+$shadows: (
+  default: 0 10px 30px rgba(0, 0, 0, 0.2),
+  hover: 0 15px 30px rgba(0, 0, 0, 0.3),
+  md: 0 8px 20px rgba(0, 0, 0, 0.2),
+  lg: 0 25px 50px rgba(0, 0, 0, 0.4),
+);
+
+// Espaciado
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 0.75rem,
+  lg: 1rem,
+  xl: 1.5rem,
+  2xl: 2rem,
+  3xl: 2.5rem,
+);
+
+// Border radius
+$radius: (
+  sm: 6px,
+  md: 8px,
+  lg: 10px,
+  xl: 12px,
+  2xl: 15px,
+  3xl: 20px,
+);
+
+// Transiciones
+$transitions: (
+  default: all 0.3s ease,
+  fast: all 0.2s ease,
+  slow: all 0.5s ease,
+);
+
+// Tipografía
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+$font-sizes: (
+  xs: 0.75rem,
+  sm: 0.85rem,
+  base: 1rem,
+  lg: 1.1rem,
+  xl: 1.2rem,
+  2xl: 1.5rem,
+  3xl: 1.8rem,
+  4xl: 2.2rem,
+  5xl: 2.5rem,
+);
+
+$font-weights: (
+  normal: 400,
+  semibold: 600,
+  bold: 700,
+);
+
+// Breakpoints
+$breakpoints: (
+  mobile: 480px,
+  tablet: 768px,
+  desktop: 1024px,
+  large: 1440px,
+);
+
+// Funciones helper para acceder a los mapas
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map-get($spacing, $key);
+}
+
+@function radius($key) {
+  @return map-get($radius, $key);
+}
+
+@function shadow($key) {
+  @return map-get($shadows, $key);
+}
+
+@function font-size($key) {
+  @return map-get($font-sizes, $key);
+}
+
+@function font-weight($key) {
+  @return map-get($font-weights, $key);
+}
+
+@function breakpoint($key) {
+  @return map-get($breakpoints, $key);
+}

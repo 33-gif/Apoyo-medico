@@ -1,0 +1,288 @@
+// =====================================================
+// NAVEGACIÓN Y TABS
+// =====================================================
+
+// Tabs
+.tabs {
+  display: flex;
+  border-bottom: 2px solid $border-color;
+  margin-bottom: spacing(2xl);
+  gap: spacing(lg);
+  overflow-x: auto;
+
+  @include media-mobile {
+    gap: spacing(sm);
+    margin-bottom: spacing(lg);
+  }
+
+  @include media-small-mobile {
+    gap: spacing(xs);
+  }
+}
+
+.tab-btn {
+  @include button-base;
+  background: transparent;
+  color: $text-muted;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: spacing(md) spacing(lg);
+  cursor: pointer;
+  font-size: font-size(base);
+  font-weight: font-weight(semibold);
+  white-space: nowrap;
+  transition: map-get($transitions, default);
+
+  &:hover {
+    color: color(primary);
+  }
+
+  &.active {
+    color: color(primary);
+    border-bottom-color: color(primary);
+  }
+
+  @include media-mobile {
+    padding: spacing(sm) spacing(md);
+    font-size: font-size(sm);
+  }
+
+  @include media-small-mobile {
+    padding: spacing(xs) spacing(sm);
+    font-size: font-size(xs);
+  }
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+
+  &.active {
+    display: block;
+  }
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+// Pagination
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: spacing(sm);
+  margin-top: spacing(2xl);
+  flex-wrap: wrap;
+
+  @include media-mobile {
+    margin-top: spacing(lg);
+    gap: spacing(xs);
+  }
+}
+
+.pagination-btn {
+  padding: spacing(sm) spacing(md);
+  border: 2px solid $border-color;
+  background: transparent;
+  color: $text;
+  border-radius: radius(lg);
+  cursor: pointer;
+  font-size: font-size(sm);
+  font-weight: font-weight(semibold);
+  transition: map-get($transitions, default);
+
+  &:hover:not(:disabled) {
+    background: color(primary);
+    border-color: color(primary);
+    color: $text;
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background: color(primary);
+    border-color: color(primary);
+    color: $text;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @include media-mobile {
+    padding: spacing(xs) spacing(sm);
+    font-size: font-size(xs);
+  }
+}
+
+// Menu items (sidebar)
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: spacing(md);
+  padding: spacing(md) spacing(lg);
+  color: $text-muted;
+  text-decoration: none;
+  border-radius: radius(lg);
+  margin-bottom: spacing(sm);
+  transition: map-get($transitions, default);
+  cursor: pointer;
+  font-weight: font-weight(semibold);
+
+  &:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: color(primary);
+  }
+
+  &.active {
+    background: color(primary);
+    color: $text;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  @include media-mobile {
+    padding: spacing(sm) spacing(md);
+    gap: spacing(sm);
+  }
+
+  @include media-small-mobile {
+    padding: spacing(xs) spacing(sm);
+    font-size: font-size(sm);
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// Breadcrumb
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: spacing(sm);
+  margin-bottom: spacing(lg);
+  font-size: font-size(sm);
+  color: $text-muted;
+
+  a {
+    color: color(primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .separator {
+    color: $border-color;
+  }
+
+  .current {
+    color: $text;
+    font-weight: font-weight(semibold);
+  }
+
+  @include media-mobile {
+    font-size: font-size(xs);
+    margin-bottom: spacing(md);
+  }
+}
+
+// Filter tags
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(sm);
+  background: rgba(16, 185, 129, 0.2);
+  color: color(primary);
+  padding: spacing(xs) spacing(md);
+  border-radius: 20px;
+  font-size: font-size(sm);
+  margin-right: spacing(sm);
+  margin-bottom: spacing(sm);
+
+  &.tag-doctor {
+    background: rgba(37, 99, 235, 0.2);
+    color: color(accent);
+  }
+
+  &.tag-recepcionista {
+    background: rgba(251, 191, 36, 0.2);
+    color: color(warning);
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  @include media-mobile {
+    padding: spacing(xs) spacing(sm);
+    font-size: font-size(xs);
+  }
+}
+
+// Toggle/Switch
+.toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(md);
+  margin: spacing(md) 0;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    background: $border-color;
+    cursor: pointer;
+    position: relative;
+    transition: map-get($transitions, default);
+
+    &:checked {
+      background: color(primary);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: $text;
+      top: 2px;
+      left: 2px;
+      transition: map-get($transitions, default);
+    }
+
+    &:checked:before {
+      left: 26px;
+    }
+  }
+
+  label {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  @include media-mobile {
+    gap: spacing(sm);
+  }
+}
