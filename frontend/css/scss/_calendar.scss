@@ -3,7 +3,10 @@
 // =====================================================
 
 #calendarioCitas {
-  background: rgba(30, 41, 59, 0.9);
+  display: flex;
+  flex-direction: column;
+  min-height: 560px;
+  background: rgba(30, 41, 59, 0.92);
   padding: spacing(lg);
   border-radius: radius(xl);
   margin-bottom: spacing(2xl);
@@ -166,8 +169,14 @@
 
 // Citas container
 .citas-container {
-  @include flex-column;
+  display: grid;
+  grid-template-columns: minmax(280px, 1.6fr) minmax(300px, 1fr);
   gap: spacing(lg);
+
+  @include media-tablet {
+    grid-template-columns: 1fr;
+    gap: spacing(xl);
+  }
 
   @include media-mobile {
     gap: spacing(md);
@@ -175,71 +184,80 @@
 }
 
 .citas-list {
-  @include grid-auto-fill(350px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: spacing(xl);
 
   @include media-tablet {
-    @include grid-auto-fill(300px);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: spacing(lg);
   }
 
   @include media-mobile {
-    @include grid-auto-fit(100%);
+    grid-template-columns: 1fr;
     gap: spacing(md);
   }
 }
 
 .cita-card {
   background: map-get($backgrounds, card);
-  border: 1px solid $border-color;
-  border-left: 4px solid color(primary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 5px solid color(primary);
   border-radius: radius(xl);
   padding: spacing(xl);
-  box-shadow: shadow(md);
-  transition: map-get($transitions, default);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: shadow(hover);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.24);
     border-color: color(primary);
   }
 
   .cita-header {
     @include flex-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: spacing(md);
     margin-bottom: spacing(lg);
     padding-bottom: spacing(lg);
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
     h3 {
       color: color(primary);
-      font-size: font-size(xl);
+      font-size: font-size(2xl);
       margin: 0;
       font-weight: font-weight(bold);
+      line-height: 1.2;
     }
 
     .cita-estado {
-      padding: spacing(xs) spacing(sm);
-      border-radius: 20px;
+      padding: spacing(xs) spacing(md);
+      border-radius: radius(xl);
       font-size: font-size(xs);
       font-weight: font-weight(semibold);
       color: $text;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      min-width: max-content;
+    }
 
-      &.estado-confirmada {
-        background: rgba(16, 185, 129, 0.3);
-        color: color(primary);
-      }
+    .cita-estado.estado-confirmada {
+      background: rgba(16, 185, 129, 0.18);
+      color: color(primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
 
-      &.estado-pendiente {
-        background: rgba(251, 191, 36, 0.3);
-        color: color(warning);
-      }
+    .cita-estado.estado-pendiente {
+      background: rgba(251, 191, 36, 0.16);
+      color: color(warning);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
 
-      &.estado-cancelada {
-        background: rgba(239, 68, 68, 0.3);
-        color: color(danger);
-      }
+    .cita-estado.estado-cancelada {
+      background: rgba(239, 68, 68, 0.16);
+      color: color(danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
     }
   }
 
@@ -250,7 +268,7 @@
       margin: spacing(sm) 0;
       font-size: font-size(sm);
       color: $text-muted;
-      line-height: 1.5;
+      line-height: 1.75;
       display: flex;
       align-items: center;
       gap: spacing(sm);
@@ -263,7 +281,7 @@
       &::before {
         content: "📅";
         font-size: font-size(base);
-        opacity: 0.7;
+        opacity: 0.75;
       }
 
       &.cita-paciente::before {
@@ -279,6 +297,25 @@
   .cita-acciones {
     @include flex-column;
     gap: spacing(sm);
+
+    button {
+      padding: spacing(sm) spacing(md);
+      border: none;
+      border-radius: radius(md);
+      background: color(primary);
+      color: $text;
+      font-weight: font-weight(semibold);
+      transition: map-get($transitions, default);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: color(primary-dark);
+    }
+
+    button.danger {
+      background: color(danger);
+    }
 
     @include media-tablet {
       flex-direction: row;
@@ -330,6 +367,13 @@
 
 // Cita form enhancements
 .cita-form {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: spacing(xl);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: radius(xl);
+
   .form-group {
     margin-bottom: spacing(lg);
 
@@ -346,9 +390,9 @@
     textarea {
       width: 100%;
       padding: spacing(md);
-      border: 2px solid $border-color;
-      border-radius: radius(lg);
-      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: radius(xl);
+      background: rgba(255, 255, 255, 0.04);
       color: $text;
       font-size: font-size(base);
       transition: map-get($transitions, default);
@@ -356,7 +400,7 @@
       &:focus {
         outline: none;
         border-color: color(primary);
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.12);
       }
 
       &::placeholder {
@@ -366,7 +410,7 @@
 
     textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
     }
 
     select option {
@@ -377,7 +421,7 @@
 
   .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
     gap: spacing(lg);
 
     @include media-mobile {
@@ -498,7 +542,11 @@
   flex-wrap: wrap;
   gap: spacing(lg);
   margin: spacing(lg) 0;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: spacing(md);
+  border-radius: radius(xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.7);
 
   .legend-item {
     display: flex;

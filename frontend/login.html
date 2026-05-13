@@ -9,13 +9,34 @@
 <body>
 
 <div class="login-box">
-<h2>Sistema Clínico</h2>
+<h2>🏥 Sistema Clínico</h2>
 
-<input type="email" id="email" placeholder="Correo">
-<input type="password" id="password" placeholder="Contraseña">
+<div class="tabs" style="justify-content: center; border-bottom: 2px solid rgba(255,255,255,0.2); margin-bottom: 1.5rem;">
+  <button class="tab-btn active" onclick="switchTab('login-form')" style="border-bottom: 3px solid #7dd3fc; padding: 0.5rem 1rem;">Iniciar Sesión</button>
+  <button class="tab-btn" onclick="switchTab('register-form')" style="border-bottom: 3px solid transparent; padding: 0.5rem 1rem;">Registrarse</button>
+</div>
 
-<button onclick="iniciarSesion()">Ingresar</button>
-<p id="mensaje"></p>
+<!-- LOGIN TAB -->
+<div id="login-form" class="tab-content active">
+  <input type="email" id="email" placeholder="Correo" style="margin-bottom: 0.75rem;">
+  <input type="password" id="password" placeholder="Contraseña" style="margin-bottom: 1rem;">
+  <button onclick="iniciarSesion()" style="width: 100%;">Ingresar</button>
+</div>
+
+<!-- REGISTER TAB -->
+<div id="register-form" class="tab-content" style="display: none;">
+  <input type="text" id="nombre-reg" placeholder="Nombre completo" style="margin-bottom: 0.75rem;">
+  <input type="email" id="email-reg" placeholder="Correo" style="margin-bottom: 0.75rem;">
+  <input type="password" id="password-reg" placeholder="Contraseña" style="margin-bottom: 0.75rem;">
+  <select id="rol-reg" style="margin-bottom: 1rem;">
+    <option value="recepcionista">Recepcionista</option>
+    <option value="doctor">Doctor</option>
+    <option value="admin">Admin</option>
+  </select>
+  <button onclick="registrarse()" style="width: 100%;">Crear Cuenta</button>
+</div>
+
+<p id="mensaje" style="margin-top: 1rem; text-align: center;"></p>
 </div>
 
 <script src="services/authService.js"></script>
@@ -25,6 +46,25 @@
   window.addEventListener('DOMContentLoaded', () => {
     checkAuthLogin();
   });
+
+  function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.style.display = 'none';
+    });
+    
+    // Show selected tab
+    document.getElementById(tabName).style.display = 'block';
+    
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+      if ((idx === 0 && tabName === 'login-form') || (idx === 1 && tabName === 'register-form')) {
+        btn.style.borderBottom = '3px solid #7dd3fc';
+      } else {
+        btn.style.borderBottom = '3px solid transparent';
+      }
+    });
+  }
 
   async function iniciarSesion() {
     const email = document.getElementById('email').value;
@@ -48,6 +88,43 @@
       }, 500);
     } else {
       showAlert(resultado.error, 'error');
+    }
+  }
+
+  async function registrarse() {
+    const nombre = document.getElementById('nombre-reg').value;
+    const email = document.getElementById('email-reg').value;
+    const password = document.getElementById('password-reg').value;
+    const rol = document.getElementById('rol-reg').value;
+
+    if (!nombre || !email || !password) {
+      showAlert('Complete todos los campos', 'error');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, password, rol })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        showAlert(data.error || 'Error al registrarse', 'error');
+        return;
+      }
+
+      showAlert('Cuenta creada exitosamente. Ahora inicia sesión.', 'success');
+      // Clear form
+      document.getElementById('nombre-reg').value = '';
+      document.getElementById('email-reg').value = '';
+      document.getElementById('password-reg').value = '';
+      // Switch to login
+      switchTab('login-form');
+    } catch (error) {
+      showAlert('Error conectando con el servidor', 'error');
     }
   }
 </script>

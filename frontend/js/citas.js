@@ -1,12 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
-router.get('/', async (req, res) => {
-  res.json([]);
-});
-
-module.exports = router;
-
 // GESTIÓN DE CITAS
 let citasLista = [];
 let calendario;
@@ -66,6 +57,30 @@ async function cargarCitas() {
     contenedor.innerHTML = '<p style="color: #ef4444; text-align: center;">Error al cargar citas. Verifica que el servidor esté corriendo.</p>';
   }
 }
+
+function renderizarCitas() {
+  const contenedor = document.getElementById('citasLista');
+
+  if (!citasLista || citasLista.length === 0) {
+    contenedor.innerHTML = '<p style="text-align: center; color: #334155;">No hay citas para mostrar</p>';
+    return;
+  }
+
+  contenedor.innerHTML = citasLista.map(cita => `
+    <div class="cita-item">
+      <div>
+        <strong>${cita.paciente_nombre || cita.paciente?.nombre || 'Paciente'}</strong><br>
+        ${cita.fecha} ${cita.hora}<br>
+        ${cita.motivo}
+      </div>
+      <div class="cita-actions">
+        <button onclick="editarCita(${cita.id})">Editar</button>
+        <button onclick="eliminarCita(${cita.id})">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 // RENDERIZAR CALENDARIO CON FULLCALENDAR
 function renderizarCalendario() {
 
@@ -171,8 +186,7 @@ async function guardarCita() {
 
     alert(esEdicion ? 'Cita actualizada correctamente' : 'Cita guardada correctamente');
     cerrarModalCitas();
-   renderizarCitas();
-   renderizarCalendario();
+    await cargarCitas();
 
   } catch (error) {
     console.error(error);
@@ -216,6 +230,5 @@ function editarCita(citaId) {
 
   // Guardar id para saber que es edición
   document.getElementById('modalCitas').dataset.editandoId = citaId;
-
- // document.getElementById('modalCitas').style.display = 'flex';
+  abrirFormularioCita();
 }

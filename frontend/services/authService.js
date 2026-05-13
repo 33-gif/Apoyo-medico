@@ -38,7 +38,16 @@ class AuthService {
 
   getUser() {
     const user = localStorage.getItem("usuario");
-    return user ? JSON.parse(user) : null;
+    if (!user || user === "undefined") {
+      return null;
+    }
+
+    try {
+      return JSON.parse(user);
+    } catch (error) {
+      console.warn("Usuario en localStorage no es JSON válido:", user);
+      return null;
+    }
   }
 
   isAdmin() {

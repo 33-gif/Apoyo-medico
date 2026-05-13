@@ -62,5 +62,6 @@ function verificarAuthLogin() {
 // CERRAR SESIÓN
 function logout() {
   localStorage.removeItem("token");
-  window.location.href = "login.html";
+  localStorage.removeItem("usuario");
+  window.location.href = "./login.html";
 }
