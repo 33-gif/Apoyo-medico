@@ -14,7 +14,12 @@
   <aside class="sidebar">
     <h2>🩺 Clínica</h2>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="sidebarNav"></nav>
+    <nav class="sidebar-nav">
+      <a href="#" class="active" onclick="switchTab('pacientes'); return false;">👥 Pacientes</a>
+      <a href="#" onclick="switchTab('estadisticas'); return false;">📊 Estadísticas</a>
+      <a href="#" onclick="switchTab('citas'); return false;">📅 Citas</a>
+      <a href="#" onclick="switchTab('busqueda'); return false;">🔍 Búsqueda</a>
+    </nav>
     <button onclick="logout()">Cerrar sesión</button>
   </aside>
  
@@ -27,7 +32,33 @@
              placeholder="Buscar paciente..."
              oninput="filtrarPacientes()">
     </header>
- 
+   
+    <section class="dashboard-heading">
+      <div>
+        <p class="small-label">Panel de control</p>
+        <h2>Bienvenido al sistema clínico</h2>
+        <p class="subtext">Gestiona pacientes, citas y estadísticas desde un solo lugar con un diseño más claro y funcional.</p>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-primary" onclick="switchTab('citas')">+ Nueva cita</button>
+      </div>
+    </section>
+
+    <section class="overview-cards">
+      <article class="overview-card">
+        <span>Total pacientes</span>
+        <strong>Actualizando...</strong>
+      </article>
+      <article class="overview-card">
+        <span>Citas próximas</span>
+        <strong>Revisa el calendario</strong>
+      </article>
+      <article class="overview-card">
+        <span>Hombres / Mujeres</span>
+        <strong>Ver estadísticas</strong>
+      </article>
+    </section>
+
     <!-- TABS DE NAVEGACIÓN -->
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('pacientes')">👥 Pacientes</button>
