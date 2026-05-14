@@ -5,11 +5,14 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 let usuarioEnEdicion = null;
+let usuariosLista = [];
 
 async function cargarUsuarios() {
   try {
     const usuarios = await usuariosService.obtenerUsuarios();
-    renderizarTablaUsuarios(usuarios);
+    usuariosLista = Array.isArray(usuarios) ? usuarios : [];
+    actualizarResumenRoles();
+    renderizarTablaUsuarios(usuariosLista);
   } catch (error) {
     console.error("Error cargando usuarios:", error);
     showAlert("Error al cargar usuarios", "error");
@@ -20,20 +23,63 @@ function renderizarTablaUsuarios(usuarios) {
   const tbody = document.getElementById("tablaUsuarios");
   tbody.innerHTML = "";
 
+  if (!usuarios.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="table-empty">No hay usuarios para mostrar</td></tr>';
+    return;
+  }
+
   usuarios.forEach((usuario) => {
     const tr = document.createElement("tr");
+    const usuarioData = encodeURIComponent(JSON.stringify(usuario));
     tr.innerHTML = `
       <td>${usuario.id}</td>
       <td>${usuario.nombre}</td>
       <td>${usuario.email}</td>
       <td><span class="badge badge-${usuario.rol}">${usuario.rol}</span></td>
       <td>
-        <button class="btn-small" onclick="editarUsuario(${usuario.id}, '${usuario.nombre}', '${usuario.email}', '${usuario.rol}')">✏️ Editar</button>
-        <button class="btn-small btn-danger" onclick="confirmarEliminar(${usuario.id})">🗑️ Eliminar</button>
+        <button class="btn-small" data-user="${usuarioData}" onclick="editarUsuarioDesdeBoton(this)">Editar</button>
+        <button class="btn-small btn-danger" onclick="confirmarEliminar(${usuario.id})">Eliminar</button>
       </td>
     `;
     tbody.appendChild(tr);
   });
+}
+
+function editarUsuarioDesdeBoton(boton) {
+  const usuario = JSON.parse(decodeURIComponent(boton.dataset.user));
+  editarUsuario(usuario.id, usuario.nombre, usuario.email, usuario.rol);
+}
+
+function actualizarResumenRoles() {
+  const conteo = usuariosLista.reduce((acc, usuario) => {
+    acc[usuario.rol] = (acc[usuario.rol] || 0) + 1;
+    return acc;
+  }, {});
+
+  actualizarTextoAdmin("totalUsuarios", usuariosLista.length);
+  actualizarTextoAdmin("totalAdmins", conteo.admin || 0);
+  actualizarTextoAdmin("totalDoctores", conteo.doctor || 0);
+  actualizarTextoAdmin("totalRecepcionistas", conteo.recepcionista || 0);
+}
+
+function actualizarTextoAdmin(id, valor) {
+  const elemento = document.getElementById(id);
+  if (elemento) elemento.textContent = valor;
+}
+
+function filtrarUsuarios() {
+  const texto = String(document.getElementById("buscarUsuario")?.value || "").toLowerCase();
+  const rol = document.getElementById("filtroRolUsuario")?.value || "";
+
+  const filtrados = usuariosLista.filter(usuario => {
+    const coincideTexto = !texto ||
+      String(usuario.nombre || "").toLowerCase().includes(texto) ||
+      String(usuario.email || "").toLowerCase().includes(texto);
+    const coincideRol = !rol || usuario.rol === rol;
+    return coincideTexto && coincideRol;
+  });
+
+  renderizarTablaUsuarios(filtrados);
 }
 
 function abrirFormularioUsuario() {
@@ -128,7 +174,7 @@ async function confirmarEliminar(id) {
   }
 }
 
-function switchAdminTab(tabName) {
+function switchAdminTab(tabName, evt) {
   const tabs = document.querySelectorAll(".tab-content");
   const btns = document.querySelectorAll(".tab-btn");
 
@@ -136,5 +182,5 @@ function switchAdminTab(tabName) {
   btns.forEach((btn) => btn.classList.remove("active"));
 
   document.getElementById(`tab-${tabName}`).classList.add("active");
-  event.target.classList.add("active");
+  if (evt?.currentTarget) evt.currentTarget.classList.add("active");
 }

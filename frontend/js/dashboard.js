@@ -10,39 +10,47 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderizarNavegacion() {
   const nav = document.getElementById('sidebarNav');
   const usuario = authService.getUser();
+  if (!nav) return;
   
-  let html = `
-    <a href="dashboard.html" class="menu-item">📊 Dashboard</a>
-  `;
+  let html = '';
   
   if (usuario && usuario.rol === 'admin') {
-    html += `<a href="admin.html" class="menu-item">⚙️ Administración</a>`;
+    html += `<a href="admin.html" class="menu-item">Administración</a>`;
   }
   
   nav.innerHTML = html;
 }
 
 // GESTIÓN DE TABS
-function switchTab(tabName) {
+async function switchTab(tabName, evt) {
   // Ocultar todos los tabs
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.classList.remove('active');
   });
 
-  // Desactivar todos los botones
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.remove('active');
+  // Sincronizar pestañas y navegación lateral
+  document.querySelectorAll('.tab-btn, .sidebar-nav .menu-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.tab === tabName);
   });
 
   // Mostrar tab seleccionado
   document.getElementById(`tab-${tabName}`).classList.add('active');
-  event.target.classList.add('active');
+
+  if (evt && evt.currentTarget && evt.currentTarget.dataset.tab) {
+    evt.currentTarget.classList.add('active');
+  }
+
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar) sidebar.classList.remove('menu-open');
 
   // Cargar datos específicos del tab
   if (tabName === 'estadisticas') {
-    setTimeout(cargarEstadisticas, 100);
+    if (!Array.isArray(listaPacientes) || listaPacientes.length === 0) {
+      await cargarPacientes();
+    }
+    cargarEstadisticas();
   } else if (tabName === 'citas') {
-    cargarCitas();
+    await cargarCitas();
   }
 }
 

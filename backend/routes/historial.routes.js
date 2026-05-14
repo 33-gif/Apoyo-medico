@@ -6,7 +6,7 @@ const roles = require("../config/roles");
 
 router.post(
   "/",
-  requireRole(roles.ADMIN, roles.DOCTOR),
+  requireRole(roles.ADMIN, roles.DOCTOR, roles.RECEPCIONISTA),
   historialController.crearHistorial
 );
 router.get(

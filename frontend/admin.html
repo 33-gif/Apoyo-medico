@@ -9,30 +9,79 @@
 <body>
   <div class="container">
     <aside class="sidebar">
-      <h2>🩺 Clínica</h2>
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-      <nav>
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">+</span>
+        <div>
+          <h2>Clínica La Fe</h2>
+          <small>Administración</small>
+        </div>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+      <nav class="sidebar-nav">
         <a href="dashboard.html" class="menu-item">Dashboard</a>
         <a href="admin.html" class="menu-item active">Administración</a>
       </nav>
-      <button onclick="logout()" style="margin-top: auto;">Cerrar sesión</button>
+      <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
     </aside>
 
     <main class="main">
       <header class="topbar">
-        <h1>⚙️ Administración del Sistema</h1>
+        <div>
+          <span class="eyebrow">Roles y acceso</span>
+          <h1>Administración del Sistema</h1>
+        </div>
       </header>
 
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchAdminTab('usuarios')">👤 Gestionar Usuarios</button>
+        <button class="tab-btn active" onclick="switchAdminTab('usuarios', event)">Gestionar Usuarios</button>
       </div>
 
       <!-- TAB: USUARIOS -->
       <div id="tab-usuarios" class="tab-content active">
-        <section class="acciones">
-          <button class="btn-primary" onclick="abrirFormularioUsuario()">
-            + Nuevo Usuario
-          </button>
+        <section class="role-summary" aria-label="Resumen de roles">
+          <article>
+            <span>Usuarios</span>
+            <strong id="totalUsuarios">0</strong>
+          </article>
+          <article>
+            <span>Administradores</span>
+            <strong id="totalAdmins">0</strong>
+          </article>
+          <article>
+            <span>Doctores</span>
+            <strong id="totalDoctores">0</strong>
+          </article>
+          <article>
+            <span>Recepción</span>
+            <strong id="totalRecepcionistas">0</strong>
+          </article>
+        </section>
+
+        <section class="role-panel">
+          <article>
+            <h3>Permisos por rol</h3>
+            <div class="permission-grid">
+              <span></span>
+              <strong>Admin</strong>
+              <strong>Doctor</strong>
+              <strong>Recepción</strong>
+              <span>Pacientes</span><b>Completo</b><b>Completo</b><b>Lectura</b>
+              <span>Historial</span><b>Completo</b><b>Completo</b><b>Lectura</b>
+              <span>Citas</span><b>Completo</b><b>Crear/editar</b><b>Crear</b>
+              <span>Usuarios</span><b>Completo</b><b>No</b><b>No</b>
+            </div>
+          </article>
+        </section>
+
+        <section class="admin-toolbar">
+          <button class="btn-primary" onclick="abrirFormularioUsuario()">Nuevo usuario</button>
+          <input type="search" id="buscarUsuario" placeholder="Buscar usuario o correo" oninput="filtrarUsuarios()">
+          <select id="filtroRolUsuario" onchange="filtrarUsuarios()">
+            <option value="">Todos los roles</option>
+            <option value="admin">Administrador</option>
+            <option value="doctor">Doctor</option>
+            <option value="recepcionista">Recepcionista</option>
+          </select>
         </section>
 
         <section class="tabla-container">

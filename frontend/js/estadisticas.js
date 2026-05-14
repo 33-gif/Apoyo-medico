@@ -1,155 +1,141 @@
 // ESTADÍSTICAS DEL SISTEMA
 
+function normalizarSexo(sexo) {
+  const valor = String(sexo || '').trim().toLowerCase();
+  if (['m', 'masculino', 'hombre'].includes(valor)) return 'Masculino';
+  if (['f', 'femenino', 'mujer'].includes(valor)) return 'Femenino';
+  return 'Otro';
+}
+
+function edadNumero(paciente) {
+  const edad = Number(paciente.edad);
+  return Number.isFinite(edad) && edad >= 0 ? edad : null;
+}
+
+function diagnosticoNormalizado(diagnostico) {
+  return String(diagnostico || '').trim() || 'Sin diagnóstico';
+}
+
+function contarPor(lista, selector) {
+  return lista.reduce((acc, item) => {
+    const key = selector(item);
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+}
+
+function porcentaje(cantidad, total) {
+  return total > 0 ? Math.round((cantidad / total) * 100) : 0;
+}
+
 async function cargarEstadisticas() {
   try {
-    // Calcular estadísticas
-    const total = listaPacientes.length;
-    const hombres = listaPacientes.filter(p => p.sexo === 'Masculino').length;
-    const mujeres = listaPacientes.filter(p => p.sexo === 'Femenino').length;
-    
-    // Edad promedio
-    const edadPromedio = total > 0 
-      ? Math.round(listaPacientes.reduce((sum, p) => sum + p.edad, 0) / total)
+    const pacientes = Array.isArray(listaPacientes) ? listaPacientes : [];
+    const edades = pacientes.map(edadNumero).filter(edad => edad !== null);
+    const total = pacientes.length;
+    const conteoSexo = contarPor(pacientes, paciente => normalizarSexo(paciente.sexo));
+    const conteoDiagnostico = contarPor(pacientes, paciente => diagnosticoNormalizado(paciente.diagnostico));
+    const diagnosticosValidos = Object.entries(conteoDiagnostico)
+      .filter(([diagnostico]) => diagnostico !== 'Sin diagnóstico')
+      .sort((a, b) => b[1] - a[1]);
+
+    const edadPromedio = edades.length > 0
+      ? Math.round(edades.reduce((sum, edad) => sum + edad, 0) / edades.length)
       : 0;
 
-    // Actualizar cards
-    document.getElementById('totalPacientes').innerText = total;
-    document.getElementById('totalHombres').innerText = hombres;
-    document.getElementById('totalMujeres').innerText = mujeres;
-    document.getElementById('edadPromedio').innerText = edadPromedio;
+    actualizarTexto('totalPacientes', total);
+    actualizarTexto('totalHombres', conteoSexo.Masculino || 0);
+    actualizarTexto('totalMujeres', conteoSexo.Femenino || 0);
+    actualizarTexto('edadPromedio', edadPromedio);
+    actualizarTexto('pacientesMayores', edades.filter(edad => edad >= 60).length);
+    actualizarTexto('diagnosticosUnicos', diagnosticosValidos.length);
+    actualizarTexto('edadMinima', edades.length ? Math.min(...edades) : 0);
+    actualizarTexto('edadMaxima', edades.length ? Math.max(...edades) : 0);
+    actualizarTexto('diagnosticoFrecuente', diagnosticosValidos[0]?.[0] || 'Sin datos');
 
-    // Generar gráficos
-    generarGraficoSexo();
-    generarGraficoEdad();
-    generarGraficoDiagnostico();
-
+    generarGraficoSexo(conteoSexo, total);
+    generarGraficoEdad(edades);
+    generarGraficoDiagnostico(diagnosticosValidos, total);
   } catch (error) {
     console.error('Error cargando estadísticas:', error);
   }
 }
 
-// GRÁFICO DE SEXO
-function generarGraficoSexo() {
-  const hombres = listaPacientes.filter(p => p.sexo === 'Masculino').length;
-  const mujeres = listaPacientes.filter(p => p.sexo === 'Femenino').length;
-  const otros = listaPacientes.filter(p => p.sexo !== 'Masculino' && p.sexo !== 'Femenino').length;
-
-  const total = hombres + mujeres + otros || 1;
-  const pctHombres = Math.round((hombres / total) * 100);
-  const pctMujeres = Math.round((mujeres / total) * 100);
-  const pctOtros = Math.round((otros / total) * 100);
-
-  let html = `
-    <div class="chart-bars">
-      <div class="bar-item">
-        <div class="bar-label">Masculino</div>
-        <div class="bar-container">
-          <div class="bar-fill" style="width: ${pctHombres}%; background: #3b82f6;"></div>
-        </div>
-        <div class="bar-value">${hombres} (${pctHombres}%)</div>
-      </div>
-      <div class="bar-item">
-        <div class="bar-label">Femenino</div>
-        <div class="bar-container">
-          <div class="bar-fill" style="width: ${pctMujeres}%; background: #ec4899;"></div>
-        </div>
-        <div class="bar-value">${mujeres} (${pctMujeres}%)</div>
-      </div>
-      ${otros > 0 ? `
-      <div class="bar-item">
-        <div class="bar-label">Otros</div>
-        <div class="bar-container">
-          <div class="bar-fill" style="width: ${pctOtros}%; background: #f59e0b;"></div>
-        </div>
-        <div class="bar-value">${otros} (${pctOtros}%)</div>
-      </div>
-      ` : ''}
-    </div>
-  `;
-
-  document.getElementById('chartSexo').innerHTML = html;
+function actualizarTexto(id, valor) {
+  const elemento = document.getElementById(id);
+  if (elemento) elemento.innerText = valor;
 }
 
-// GRÁFICO DE EDAD
-function generarGraficoEdad() {
-  // Agrupar por rangos de edad
-  const rangos = {
-    '0-18': 0,
-    '19-30': 0,
-    '31-45': 0,
-    '46-60': 0,
-    '60+': 0
-  };
+function renderBarChart(containerId, items, emptyMessage = 'Sin datos disponibles') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-  listaPacientes.forEach(p => {
-    if (p.edad < 19) rangos['0-18']++;
-    else if (p.edad < 31) rangos['19-30']++;
-    else if (p.edad < 46) rangos['31-45']++;
-    else if (p.edad < 61) rangos['46-60']++;
-    else rangos['60+']++;
-  });
-
-  const maxRango = Math.max(...Object.values(rangos)) || 1;
-  const total = listaPacientes.length || 1;
-
-  let html = '<div class="chart-bars">';
-  Object.entries(rangos).forEach(([rango, cantidad]) => {
-    const porcentaje = Math.round((cantidad / total) * 100);
-    const width = (cantidad / maxRango) * 100;
-    html += `
-      <div class="bar-item">
-        <div class="bar-label">${rango} años</div>
-        <div class="bar-container">
-          <div class="bar-fill" style="width: ${width}%; background: #10b981;"></div>
-        </div>
-        <div class="bar-value">${cantidad} (${porcentaje}%)</div>
-      </div>
-    `;
-  });
-  html += '</div>';
-
-  document.getElementById('chartEdad').innerHTML = html;
-}
-
-// GRÁFICO DE DIAGNÓSTICOS
-function generarGraficoDiagnostico() {
-  // Contar diagnósticos
-  const diagnosticos = {};
-  listaPacientes.forEach(p => {
-    if (p.diagnostico) {
-      diagnosticos[p.diagnostico] = (diagnosticos[p.diagnostico] || 0) + 1;
-    }
-  });
-
-  // Ordenar y tomar top 5
-  const sorted = Object.entries(diagnosticos)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
-
-  if (sorted.length === 0) {
-    document.getElementById('chartDiagnostico').innerHTML = '<p style="text-align: center; color: #10b981;">Sin datos disponibles</p>';
+  if (!items.length) {
+    container.innerHTML = `<p class="empty-state">${emptyMessage}</p>`;
     return;
   }
 
-  const maxDiag = Math.max(...sorted.map(d => d[1])) || 1;
-  const total = listaPacientes.length || 1;
+  const max = Math.max(...items.map(item => item.value), 1);
+  container.innerHTML = `
+    <div class="chart-bars">
+      ${items.map(item => {
+        const width = Math.max(4, Math.round((item.value / max) * 100));
+        return `
+          <div class="bar-item">
+            <div class="bar-label" title="${item.label}">${item.label}</div>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: ${width}%; background: ${item.color};"></div>
+            </div>
+            <div class="bar-value">${item.value} (${item.percent}%)</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
 
-  let html = '<div class="chart-bars">';
-  sorted.forEach(([diag, cantidad]) => {
-    const porcentaje = Math.round((cantidad / total) * 100);
-    const width = (cantidad / maxDiag) * 100;
-    const etiqueta = diag.length > 20 ? diag.substring(0, 20) + '...' : diag;
-    html += `
-      <div class="bar-item">
-        <div class="bar-label" title="${diag}">${etiqueta}</div>
-        <div class="bar-container">
-          <div class="bar-fill" style="width: ${width}%; background: #f59e0b;"></div>
-        </div>
-        <div class="bar-value">${cantidad} (${porcentaje}%)</div>
-      </div>
-    `;
+function generarGraficoSexo(conteoSexo, total) {
+  const items = [
+    { label: 'Masculino', value: conteoSexo.Masculino || 0, color: '#2563eb' },
+    { label: 'Femenino', value: conteoSexo.Femenino || 0, color: '#db2777' },
+    { label: 'Otro / sin dato', value: conteoSexo.Otro || 0, color: '#d97706' }
+  ]
+    .filter(item => item.value > 0)
+    .map(item => ({ ...item, percent: porcentaje(item.value, total) }));
+
+  renderBarChart('chartSexo', items);
+}
+
+function generarGraficoEdad(edades) {
+  const rangos = [
+    { label: '0-18 años', min: 0, max: 18, color: '#38bdf8' },
+    { label: '19-30 años', min: 19, max: 30, color: '#0f9f8f' },
+    { label: '31-45 años', min: 31, max: 45, color: '#2563eb' },
+    { label: '46-60 años', min: 46, max: 60, color: '#7c3aed' },
+    { label: '61+ años', min: 61, max: Infinity, color: '#d97706' }
+  ];
+
+  const items = rangos.map(rango => {
+    const value = edades.filter(edad => edad >= rango.min && edad <= rango.max).length;
+    return {
+      label: rango.label,
+      value,
+      percent: porcentaje(value, edades.length),
+      color: rango.color
+    };
   });
-  html += '</div>';
 
-  document.getElementById('chartDiagnostico').innerHTML = html;
+  renderBarChart('chartEdad', items, 'No hay edades registradas');
+}
+
+function generarGraficoDiagnostico(diagnosticosOrdenados, total) {
+  const colores = ['#0f9f8f', '#2563eb', '#7c3aed', '#d97706', '#dc2626'];
+  const items = diagnosticosOrdenados.slice(0, 5).map(([diagnostico, cantidad], index) => ({
+    label: diagnostico.length > 28 ? `${diagnostico.slice(0, 28)}...` : diagnostico,
+    value: cantidad,
+    percent: porcentaje(cantidad, total),
+    color: colores[index] || '#64748b'
+  }));
+
+  renderBarChart('chartDiagnostico', items);
 }

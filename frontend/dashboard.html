@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Sistema Clínico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Clínico La Fe</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 </head>
@@ -12,21 +13,31 @@
 <div class="container">
  
   <aside class="sidebar">
-    <h2>🩺 Clínica</h2>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav class="sidebar-nav">
-      <a href="#" class="active" onclick="switchTab('pacientes'); return false;">👥 Pacientes</a>
-      <a href="#" onclick="switchTab('estadisticas'); return false;">📊 Estadísticas</a>
-      <a href="#" onclick="switchTab('citas'); return false;">📅 Citas</a>
-      <a href="#" onclick="switchTab('busqueda'); return false;">🔍 Búsqueda</a>
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">+</span>
+      <div>
+        <h2>Clínica La Fe</h2>
+        <small>Gestión médica</small>
+      </div>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+    <nav class="sidebar-nav" aria-label="Secciones del panel">
+      <a href="#" class="menu-item active" data-tab="pacientes" onclick="switchTab('pacientes', event); return false;">Pacientes</a>
+      <a href="#" class="menu-item" data-tab="estadisticas" onclick="switchTab('estadisticas', event); return false;">Estadísticas</a>
+      <a href="#" class="menu-item" data-tab="citas" onclick="switchTab('citas', event); return false;">Citas</a>
+      <a href="#" class="menu-item" data-tab="busqueda" onclick="switchTab('busqueda', event); return false;">Búsqueda</a>
     </nav>
-    <button onclick="logout()">Cerrar sesión</button>
+    <nav id="sidebarNav" class="account-nav" aria-label="Cuenta"></nav>
+    <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
   </aside>
  
   <main class="main">
  
     <header class="topbar">
-      <h1>🏥 Sistema Clínico</h1>
+      <div>
+        <span class="eyebrow">Sistema Clínico</span>
+        <h1>Clínica La Fe</h1>
+      </div>
       <input id="buscador"
              type="text"
              placeholder="Buscar paciente..."
@@ -36,54 +47,87 @@
     <section class="dashboard-heading">
       <div>
         <p class="small-label">Panel de control</p>
-        <h2>Bienvenido al sistema clínico</h2>
-        <p class="subtext">Gestiona pacientes, citas y estadísticas desde un solo lugar con un diseño más claro y funcional.</p>
+        <h2>Gestión central de pacientes y citas</h2>
+        <p class="subtext">Administra pacientes, agenda médica, reportes y búsquedas clínicas desde un panel claro y rápido.</p>
       </div>
       <div class="action-buttons">
-        <button class="btn-primary" onclick="switchTab('citas')">+ Nueva cita</button>
+        <button class="btn-primary" onclick="switchTab('citas')">Nueva cita</button>
       </div>
     </section>
 
     <section class="overview-cards">
       <article class="overview-card">
         <span>Total pacientes</span>
-        <strong>Actualizando...</strong>
+        <strong id="resumenPacientes">Actualizando</strong>
       </article>
       <article class="overview-card">
         <span>Citas próximas</span>
-        <strong>Revisa el calendario</strong>
+        <strong>Calendario</strong>
       </article>
       <article class="overview-card">
         <span>Hombres / Mujeres</span>
-        <strong>Ver estadísticas</strong>
+        <strong>Estadísticas</strong>
       </article>
     </section>
 
     <!-- TABS DE NAVEGACIÓN -->
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('pacientes')">👥 Pacientes</button>
-      <button class="tab-btn" onclick="switchTab('estadisticas')">📊 Estadísticas</button>
-      <button class="tab-btn" onclick="switchTab('citas')">📅 Citas</button>
-      <button class="tab-btn" onclick="switchTab('busqueda')">🔍 Búsqueda Avanzada</button>
+      <button class="tab-btn active" data-tab="pacientes" onclick="switchTab('pacientes', event)">Pacientes</button>
+      <button class="tab-btn" data-tab="estadisticas" onclick="switchTab('estadisticas', event)">Estadísticas</button>
+      <button class="tab-btn" data-tab="citas" onclick="switchTab('citas', event)">Citas</button>
+      <button class="tab-btn" data-tab="busqueda" onclick="switchTab('busqueda', event)">Búsqueda avanzada</button>
     </div>
  
     <!-- TAB: PACIENTES -->
     <div id="tab-pacientes" class="tab-content active">
+      <section class="clinical-workbench" aria-label="Vista clínica de pacientes">
+        <article>
+          <span>Prioridad clínica</span>
+          <strong id="pacientesPrioridad">0</strong>
+          <small>Pacientes con diagnóstico registrado</small>
+        </article>
+        <article>
+          <span>Adultos mayores</span>
+          <strong id="pacientesAdultosMayores">0</strong>
+          <small>Seguimiento recomendado</small>
+        </article>
+        <article>
+          <span>Sin diagnóstico</span>
+          <strong id="pacientesSinDiagnostico">0</strong>
+          <small>Historias por completar</small>
+        </article>
+      </section>
+
+      <section class="patient-tools">
+        <select id="filtroPacientesSexo" onchange="filtrarPacientes()">
+          <option value="">Todos los sexos</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+        <select id="filtroPacientesRiesgo" onchange="filtrarPacientes()">
+          <option value="">Todos los perfiles</option>
+          <option value="mayores">Adultos mayores</option>
+          <option value="diagnostico">Con diagnóstico</option>
+          <option value="pendientes">Sin diagnóstico</option>
+        </select>
+        <button class="btn-secondary" onclick="limpiarFiltrosPacientes()">Limpiar filtros</button>
+      </section>
+
       <section class="acciones">
         <button class="btn-primary" onclick="abrirFormulario()">
-          + Nuevo Paciente
+          Nuevo paciente
         </button>
         <!-- CORREGIDO: antes llamaba a mostrarCitas() que colisiona con la función
              de renderizado en citas.js. Ahora cambia al tab de citas correctamente. -->
         <button class="btn-primary" onclick="switchTab('citas')">
-          📅 Ver Citas
+          Ver citas
         </button>
  
         <button class="btn-primary" onclick="exportarPacientes()">
-          📥 Exportar Excel
+          Exportar Excel
         </button>
         <button class="btn-primary" onclick="exportarPDF()">
-          📄 Exportar PDF
+          Exportar PDF
         </button>
       </section>
  
@@ -126,39 +170,85 @@
           <div class="stat-number" id="edadPromedio">0</div>
           <div class="stat-label">Edad Promedio</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-number" id="pacientesMayores">0</div>
+          <div class="stat-label">Mayores de 60</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="diagnosticosUnicos">0</div>
+          <div class="stat-label">Diagnósticos únicos</div>
+        </div>
+      </section>
+
+      <section class="stats-insights" aria-label="Resumen estadístico">
+        <article>
+          <span>Edad menor</span>
+          <strong id="edadMinima">0</strong>
+        </article>
+        <article>
+          <span>Edad mayor</span>
+          <strong id="edadMaxima">0</strong>
+        </article>
+        <article>
+          <span>Diagnóstico más frecuente</span>
+          <strong id="diagnosticoFrecuente">Sin datos</strong>
+        </article>
       </section>
  
       <section class="charts-container">
         <div class="chart-wrapper">
           <h3>Distribución por Sexo</h3>
-          <div id="chartSexo" style="height: 300px;">Cargando...</div>
+          <div id="chartSexo">Cargando...</div>
         </div>
         <div class="chart-wrapper">
           <h3>Distribución por Edad</h3>
-          <div id="chartEdad" style="height: 300px;">Cargando...</div>
+          <div id="chartEdad">Cargando...</div>
         </div>
         <div class="chart-wrapper">
           <h3>Top Diagnósticos</h3>
-          <div id="chartDiagnostico" style="height: 300px;">Cargando...</div>
+          <div id="chartDiagnostico">Cargando...</div>
         </div>
       </section>
     </div>
  
     <!-- TAB: CITAS -->
     <div id="tab-citas" class="tab-content">
-      <section class="acciones">
-        <!-- CORREGIDO: antes el nombre no existía en citas.js, ahora sí está definido -->
-        <button class="btn-primary" onclick="abrirFormularioCita()">
-          + Nueva Cita
-        </button>
+      <section class="citas-summary" aria-label="Resumen de citas">
+        <article>
+          <span>Total citas</span>
+          <strong id="totalCitas">0</strong>
+        </article>
+        <article>
+          <span>Hoy</span>
+          <strong id="citasHoy">0</strong>
+        </article>
+        <article>
+          <span>Próximas</span>
+          <strong id="citasProximas">0</strong>
+        </article>
+        <article>
+          <span>Vencidas</span>
+          <strong id="citasVencidas">0</strong>
+        </article>
+      </section>
+
+      <section class="citas-toolbar">
+        <button class="btn-primary" onclick="abrirFormularioCita()">Nueva cita</button>
+        <input type="search" id="filtroCitasTexto" placeholder="Buscar por paciente o motivo" oninput="filtrarCitas()">
+        <select id="filtroCitasEstado" onchange="filtrarCitas()">
+          <option value="todas">Todas</option>
+          <option value="hoy">Hoy</option>
+          <option value="proximas">Próximas</option>
+          <option value="vencidas">Vencidas</option>
+        </select>
+        <input type="date" id="filtroCitasFecha" onchange="filtrarCitas()">
+        <button class="btn-secondary" onclick="limpiarFiltrosCitas()">Limpiar</button>
       </section>
  
-        <div class="citas-container">
-          <div id="calendarioCitas"></div>
-             <div id="citasLista" class="citas-list">
-              Cargando citas...
-                </div>
-            </div>
+      <div class="citas-container">
+        <div id="calendarioCitas"></div>
+        <div id="citasLista" class="citas-list">Cargando citas...</div>
+      </div>
     </div>
  
     <!-- TAB: BÚSQUEDA AVANZADA -->
@@ -191,8 +281,8 @@
             <input type="text" id="filtroDiagnostico" placeholder="Diagnóstico">
           </div>
           <div style="align-self: flex-end;">
-            <button class="btn-primary" onclick="aplicarFiltros()">🔍 Buscar</button>
-            <button class="btn-primary" onclick="limpiarFiltros()" style="background: #6b7280;">Limpiar</button>
+            <button class="btn-primary" onclick="aplicarFiltros()">Buscar</button>
+            <button class="btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
           </div>
         </div>
       </section>
@@ -227,7 +317,12 @@
     <input id="nombre" placeholder="Nombre">
     <input id="documento" placeholder="Documento">
     <input id="edad" type="number" placeholder="Edad">
-    <input id="sexo" placeholder="Sexo">
+    <select id="sexo">
+      <option value="">-- Seleccionar sexo --</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+      <option value="Otro">Otro</option>
+    </select>
     <input id="diagnostico" placeholder="Diagnóstico">
  
     <div class="modal-buttons">
@@ -255,6 +350,7 @@
       <button class="btn-danger" id="cerrarHistorialBtn" onclick="cerrarHistorial()">Cerrar</button>
     </div>
  
+    <div id="historialResumen" class="historial-summary"></div>
     <div id="listaHistorial"></div>
  
   </div>
@@ -264,16 +360,21 @@
 <div id="modalCitas" class="modal">
   <div class="modal-content">
  
-    <h2>Nueva Cita Médica</h2>
+    <h2 id="tituloModalCita">Nueva Cita Médica</h2>
  
+    <label for="citaPaciente">Paciente</label>
     <select id="citaPaciente">
       <option value="">-- Seleccionar Paciente --</option>
     </select>
  
+    <label for="citaFecha">Fecha</label>
     <input type="date" id="citaFecha">
+    <label for="citaHora">Hora</label>
     <input type="time" id="citaHora">
+    <label for="citaMotivo">Motivo</label>
     <input type="text" id="citaMotivo" placeholder="Motivo de la cita">
-    <textarea id="citaNota" placeholder="Notas adicionales" style="resize: vertical; min-height: 80px;"></textarea>
+    <label for="citaNota">Notas</label>
+    <textarea id="citaNota" placeholder="Notas adicionales"></textarea>
  
     <div class="modal-buttons">
       <button class="btn-primary" onclick="guardarCita()">Guardar</button>
