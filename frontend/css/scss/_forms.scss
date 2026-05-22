@@ -20,37 +20,10 @@ select {
   }
 }
 
-// Inputs en modal
-.modal-content {
-  input,
-  textarea,
-  select {
-    width: 100%;
-    padding: spacing(md);
-    margin-bottom: spacing(md);
-    border: 2px solid $border-color;
-    border-radius: radius(lg);
-    background: rgba(255, 255, 255, 0.05);
-    color: $text;
-    font-size: font-size(base);
-    font-family: inherit;
-    transition: map-get($transitions, default);
-
-    &:focus {
-      outline: none;
-      border-color: color(primary);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    &::placeholder {
-      color: $text-light;
-    }
-  }
-}
-
 // Login box inputs
 .login-box {
-  input {
+  input,
+  select {
     width: 100%;
     padding: spacing(lg);
     margin-bottom: spacing(md);
@@ -69,6 +42,13 @@ select {
 
     &::placeholder {
       color: $text-light;
+    }
+  }
+
+  select {
+    option {
+      background: #1e293b;
+      color: $text;
     }
   }
 }

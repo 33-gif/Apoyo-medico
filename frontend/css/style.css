@@ -11,10 +11,8 @@ html {
 }
 
 body {
-  background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.16), transparent 20%),
-    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.14), transparent 22%),
-    linear-gradient(135deg, #06121f 0%, #091421 45%, #0c1a2f 100%);
-  color: #e2e8f0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
   min-height: 100vh;
   font-size: 1rem;
   line-height: 1.5;
@@ -37,7 +35,7 @@ h3 {
 }
 
 h4 {
-  font-size: 1.5rem;  
+  font-size: 1.5rem;
 }
 
 h5 {
@@ -129,54 +127,30 @@ select:focus {
 
 .sidebar {
   width: 100%;
-  background: #0f172a;
-  color: #cbd5e1;
-  padding: 2rem 1.75rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 1.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 1.75rem;
-  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.2);
-  border-right: 1px solid rgba(148, 163, 184, 0.15);
-  min-height: 100vh;
-}
-.sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-.sidebar nav a {
-  color: #cbd5e1;
-  padding: 0.9rem 1rem;
-  border-radius: 14px;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-.sidebar nav a:hover,
-.sidebar nav a.active {
-  background: rgba(16, 185, 129, 0.18);
-  color: #ecfccb;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .sidebar h2 {
-  font-size: 1.25rem;
-  font-weight: 900;
-  color: #f8fafc;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #10b981;
 }
 .sidebar button {
-  padding: 0.9rem 1.2rem;
-  background: #38bdf8;
+  padding: 0.5rem 1rem;
+  background: #ef4444;
   border: none;
-  border-radius: 16px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 700;
-  transition: all 0.25s ease;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
 }
 .sidebar button:hover {
-  background: #0ea5e9;
+  background: #dc2626;
   transform: translateY(-1px);
 }
 @media (min-width: 768px) {
@@ -269,14 +243,9 @@ select:focus {
 
 .main {
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 100%;
   overflow-x: hidden;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(10px);
 }
 @media (min-width: 768px) {
   .main {
@@ -299,107 +268,30 @@ select:focus {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 2rem;
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 1.5rem 2rem;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1.5rem;
 }
 .topbar h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #10b981;
+  margin-bottom: 0.5rem;
 }
 .topbar #buscador {
-  width: 100%;
-  max-width: 520px;
-  padding: 0.95rem 1.2rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  border-radius: 999px;
-  background: #f8fafc;
-  color: #334155;
-  font-size: 0.975rem;
-  transition: all 0.25s ease;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.8);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 .topbar #buscador:focus {
   outline: none;
-  border-color: #38bdf8;
-  background: #ffffff;
+  border-color: #10b981;
+  background: rgba(30, 41, 59, 0.8);
 }
 .topbar #buscador::placeholder {
-  color: rgba(100, 116, 139, 0.7);
-}
-
-.dashboard-heading {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 1.5rem 2rem;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-}
-.dashboard-heading .small-label {
-  display: inline-block;
-  margin-bottom: 0.75rem;
-  color: #64748b;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-}
-.dashboard-heading h2 {
-  margin: 0;
-  font-size: 2rem;
-  color: #0f172a;
-}
-.dashboard-heading .subtext {
-  margin-top: 0.5rem;
-  color: #475569;
-  max-width: 680px;
-  line-height: 1.6;
-}
-.action-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.overview-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.overview-card {
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 24px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-}
-.overview-card span {
-  display: block;
-  color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-}
-.overview-card strong {
-  display: block;
-  font-size: 1.85rem;
-  color: #0f172a;
-}
-@media (max-width: 1023px) {
-  .dashboard-heading,
-  .overview-cards {
-    padding: 1.25rem;
-  }
-  .overview-cards {
-    grid-template-columns: 1fr;
-  }
+  color: rgba(255, 255, 255, 0.6);
 }
 @media (min-width: 768px) {
   .topbar {
@@ -430,6 +322,9 @@ select:focus {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   cursor: pointer;
   font-weight: 600;
@@ -581,12 +476,6 @@ select:focus {
   flex-wrap: wrap;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 input,
 textarea,
 select {
@@ -621,34 +510,8 @@ select option {
   color: white;
 }
 
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 0.75rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  font-size: 1rem;
-  font-family: inherit;
-  transition: all 0.3s ease;
-}
-.modal-content input:focus,
-.modal-content textarea:focus,
-.modal-content select:focus {
-  outline: none;
-  border-color: #10b981;
-  background: rgba(255, 255, 255, 0.1);
-}
-.modal-content input::placeholder,
-.modal-content textarea::placeholder,
-.modal-content select::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.login-box input {
+.login-box input,
+.login-box select {
   width: 100%;
   padding: 1rem;
   margin-bottom: 0.75rem;
@@ -659,13 +522,19 @@ select option {
   color: white;
   transition: all 0.3s ease;
 }
-.login-box input:focus {
+.login-box input:focus,
+.login-box select:focus {
   outline: none;
   border-color: #10b981;
   background: rgba(255, 255, 255, 0.15);
 }
-.login-box input::placeholder {
+.login-box input::placeholder,
+.login-box select::placeholder {
   color: rgba(255, 255, 255, 0.6);
+}
+.login-box select option {
+  background: #1e293b;
+  color: white;
 }
 
 .filtros-container {
@@ -736,11 +605,10 @@ label {
 
 .tabla-container {
   margin-top: 1rem;
-  border-radius: 28px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: rgba(30, 41, 59, 0.8);
 }
 @media (max-width: 767px) {
   .tabla-container {
@@ -774,14 +642,14 @@ table {
 }
 
 th {
-  background: #eff6ff;
-  color: #0f172a;
-  padding: 1rem 0.75rem;
-  text-align: left;
-  font-weight: 700;
-  font-size: 0.85rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.5px;
 }
 @media (min-width: 768px) {
   th {
@@ -803,10 +671,10 @@ th {
 }
 
 td {
-  padding: 1rem 0.75rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  text-align: left;
-  color: #475569;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
 }
 @media (min-width: 768px) {
   td {
@@ -920,6 +788,7 @@ td button:last-child:hover {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  overflow-y: auto;
   z-index: 1000;
 }
 .modal.active {
@@ -930,6 +799,8 @@ td button:last-child:hover {
   background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
   width: 100%;
   max-width: 500px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
@@ -991,6 +862,7 @@ td button:last-child:hover {
   .modal-content {
     margin: 0.5rem;
     padding: 1.5rem;
+    max-height: none;
   }
   .modal-content h2 {
     font-size: 1.1rem;
@@ -1073,7 +945,7 @@ td button:last-child:hover {
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
-  width: 100%;
+  width: min(100%, 400px);
   max-width: 400px;
   margin: 2rem auto;
   text-align: center;
@@ -1087,7 +959,7 @@ td button:last-child:hover {
 }
 @media (max-width: 767px) {
   .login-box {
-    margin: 1rem;
+    margin: 1rem auto;
     padding: 1.5rem;
   }
   .login-box h2 {
@@ -1096,7 +968,7 @@ td button:last-child:hover {
 }
 @media (max-width: 480px) {
   .login-box {
-    margin: 0.5rem;
+    margin: 0.5rem auto;
     padding: 1rem;
   }
   .login-box h2 {
@@ -1126,8 +998,9 @@ td button:last-child:hover {
 
 .tabs {
   display: flex;
-  gap: 1rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 2rem;
+  gap: 1rem;
   overflow-x: auto;
 }
 @media (max-width: 767px) {
@@ -1143,25 +1016,33 @@ td button:last-child:hover {
 }
 
 .tab-btn {
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: #ffffff;
-  color: #334155;
-  border-radius: 999px;
-  padding: 0.85rem 1.15rem;
-  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
   font-weight: 600;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
+  border-radius: 10px;
 }
 .tab-btn:hover {
-  background: #eff6ff;
-  color: #0f172a;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+.tab-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  color: #10b981;
 }
 .tab-btn.active {
-  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.18);
+  color: #10b981;
+  border-bottom-color: #10b981;
 }
 @media (max-width: 767px) {
   .tab-btn {
@@ -1349,36 +1230,127 @@ td button:last-child:hover {
   }
 }
 
+.toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.toggle-switch input[type=checkbox] {
+  appearance: none;
+  width: 50px;
+  height: 26px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.toggle-switch input[type=checkbox]:checked {
+  background: #10b981;
+}
+.toggle-switch input[type=checkbox]:before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+}
+.toggle-switch input[type=checkbox]:checked:before {
+  left: 26px;
+}
+.toggle-switch label {
+  cursor: pointer;
+  user-select: none;
+}
+@media (max-width: 767px) {
+  .toggle-switch {
+    gap: 0.5rem;
+  }
+}
 
+.cita-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cita-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+}
+.cita-card h4 {
+  color: #10b981;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.cita-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cita-card p strong {
+  color: white;
+}
+.cita-card .cita-hora {
+  background: #10b981;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+@media (max-width: 767px) {
+  .cita-card {
+    padding: 0.75rem;
+  }
+  .cita-card h4 {
+    font-size: 1rem;
+  }
+  .cita-card p {
+    font-size: 0.75rem;
+  }
+}
 
 .stat-card {
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 24px;
-  padding: 1.5rem;
-  text-align: left;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 .stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 .stat-card .stat-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.75rem;
-  color: #0ea5e9;
 }
 .stat-card .stat-number {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 0.3rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
 }
 .stat-card .stat-label {
-  font-size: 0.9rem;
-  color: #475569;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.5px;
 }
 @media (max-width: 767px) {
   .stat-card {
@@ -1403,27 +1375,22 @@ td button:last-child:hover {
   }
 }
 
-.estadisticas-container {
+.estadisticas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
 }
-@media (max-width: 767px) {
-  .estadisticas-container {
-    grid-template-columns: 1fr;
+@media (min-width: 768px) {
+  .estadisticas-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
-
-.charts-container {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(300px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-@media (max-width: 1023px) {
-  .charts-container {
+@media (max-width: 767px) {
+  .estadisticas-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -1466,6 +1433,45 @@ td button:last-child:hover {
   }
 }
 
+.paciente-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.paciente-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #10b981;
+}
+.paciente-card h4 {
+  color: white;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.paciente-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0.25rem 0;
+}
+.paciente-card .paciente-id {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+}
+@media (max-width: 767px) {
+  .paciente-card {
+    padding: 0.75rem;
+  }
+  .paciente-card h4 {
+    font-size: 1rem;
+  }
+  .paciente-card p {
+    font-size: 0.75rem;
+  }
+}
 
 .alert {
   padding: 1rem;
@@ -1502,7 +1508,10 @@ td button:last-child:hover {
 }
 
 #calendarioCitas {
-  background: rgba(30, 41, 59, 0.9);
+  display: flex;
+  flex-direction: column;
+  min-height: 560px;
+  background: rgba(30, 41, 59, 0.92);
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -1639,9 +1648,15 @@ td button:last-child:hover {
 }
 
 .citas-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(280px, 1.6fr) minmax(300px, 1fr);
   gap: 1rem;
+}
+@media (min-width: 768px) {
+  .citas-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 @media (max-width: 767px) {
   .citas-container {
@@ -1651,72 +1666,78 @@ td button:last-child:hover {
 
 .citas-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 @media (min-width: 768px) {
   .citas-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
   }
 }
 @media (max-width: 767px) {
   .citas-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    grid-template-columns: 1fr;
     gap: 0.75rem;
   }
 }
 
 .cita-card {
   background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 4px solid #10b981;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 5px solid #10b981;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
   cursor: pointer;
 }
 .cita-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.24);
   border-color: #10b981;
 }
 .cita-card .cita-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0.75rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .cita-card .cita-header h3 {
   color: #10b981;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin: 0;
   font-weight: 700;
+  line-height: 1.2;
 }
 .cita-card .cita-header .cita-estado {
-  padding: 0.25rem 0.5rem;
-  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 600;
   color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: max-content;
 }
 .cita-card .cita-header .cita-estado.estado-confirmada {
-  background: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.18);
   color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 .cita-card .cita-header .cita-estado.estado-pendiente {
-  background: rgba(251, 191, 36, 0.3);
+  background: rgba(251, 191, 36, 0.16);
   color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.3);
 }
 .cita-card .cita-header .cita-estado.estado-cancelada {
-  background: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.16);
   color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 .cita-card .cita-details {
   margin-bottom: 1rem;
@@ -1725,7 +1746,7 @@ td button:last-child:hover {
   margin: 0.5rem 0;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
+  line-height: 1.75;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1737,7 +1758,7 @@ td button:last-child:hover {
 .cita-card .cita-details p::before {
   content: "📅";
   font-size: 1rem;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 .cita-card .cita-details p.cita-paciente::before {
   content: "👤";
@@ -1749,6 +1770,22 @@ td button:last-child:hover {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.cita-card .cita-acciones button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: #10b981;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.cita-card .cita-acciones button:hover {
+  background: #059669;
+}
+.cita-card .cita-acciones button.danger {
+  background: #ef4444;
 }
 @media (min-width: 768px) {
   .cita-card .cita-acciones {
@@ -1795,6 +1832,14 @@ td button:last-child:hover {
   }
 }
 
+.cita-form {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
 .cita-form .form-group {
   margin-bottom: 1rem;
 }
@@ -1811,8 +1856,8 @@ td button:last-child:hover {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
   color: white;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -1822,7 +1867,7 @@ td button:last-child:hover {
 .cita-form .form-group textarea:focus {
   outline: none;
   border-color: #10b981;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 .cita-form .form-group input::placeholder,
 .cita-form .form-group select::placeholder,
@@ -1831,7 +1876,7 @@ td button:last-child:hover {
 }
 .cita-form .form-group textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
 }
 .cita-form .form-group select option {
   background: #1e293b;
@@ -1839,7 +1884,7 @@ td button:last-child:hover {
 }
 .cita-form .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 1rem;
 }
 @media (max-width: 767px) {
@@ -1950,7 +1995,11 @@ td button:last-child:hover {
   flex-wrap: wrap;
   gap: 1rem;
   margin: 1rem 0;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.7);
 }
 .calendar-legend .legend-item {
   display: flex;
@@ -2005,42 +2054,34 @@ td button:last-child:hover {
   --sidebar: #0d1b2a;
 }
 
-body {
-  background:
-    radial-gradient(circle at 12% 10%, rgba(15, 159, 143, 0.16), transparent 28%),
-    radial-gradient(circle at 90% 0%, rgba(37, 99, 235, 0.12), transparent 26%),
-    var(--page-bg);
+body.dashboard-page {
+  background: radial-gradient(circle at 12% 10%, rgba(15, 159, 143, 0.16), transparent 28%), radial-gradient(circle at 90% 0%, rgba(37, 99, 235, 0.12), transparent 26%), var(--page-bg);
   color: var(--ink);
 }
-
-.container {
+body.dashboard-page .container {
   max-width: none;
   min-height: 100vh;
 }
-
 @media (min-width: 1024px) {
-  .container {
+  body.dashboard-page .container {
     max-width: none;
     margin: 0;
   }
 }
-
-.sidebar {
+body.dashboard-page .sidebar {
   background: linear-gradient(180deg, #0d1b2a 0%, #0b1623 100%);
   color: #dbeafe;
   gap: 1.25rem;
   padding: 1.5rem;
   box-shadow: 18px 0 50px rgba(15, 23, 42, 0.18);
 }
-
-.brand {
+body.dashboard-page .brand {
   display: flex;
   align-items: center;
   gap: 0.85rem;
   min-height: 48px;
 }
-
-.brand-icon {
+body.dashboard-page .brand-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2053,56 +2094,49 @@ body {
   font-weight: 800;
   line-height: 1;
 }
-
-.brand h2,
-.sidebar h2 {
+body.dashboard-page .brand h2,
+body.dashboard-page .sidebar h2 {
   margin: 0;
   color: white;
   font-size: 1.15rem;
   letter-spacing: 0;
   text-transform: none;
 }
-
-.brand small {
+body.dashboard-page .brand small {
   display: block;
   margin-top: 0.15rem;
   color: #93a4b8;
   font-weight: 600;
 }
-
-.sidebar-nav,
-.account-nav {
+body.dashboard-page .sidebar-nav,
+body.dashboard-page .account-nav {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
-
-.account-nav {
+body.dashboard-page .account-nav {
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid rgba(148, 163, 184, 0.14);
 }
-
-.sidebar-nav .menu-item,
-.account-nav .menu-item,
-#sidebarNav .menu-item {
+body.dashboard-page .sidebar-nav .menu-item,
+body.dashboard-page .account-nav .menu-item,
+body.dashboard-page #sidebarNav .menu-item {
   margin: 0;
   border-radius: 12px;
   color: #cbd5e1;
   font-weight: 700;
 }
-
-.sidebar-nav .menu-item:hover,
-.account-nav .menu-item:hover,
-.sidebar-nav .menu-item.active,
-#sidebarNav .menu-item:hover,
-#sidebarNav .menu-item.active {
+body.dashboard-page .sidebar-nav .menu-item:hover,
+body.dashboard-page .account-nav .menu-item:hover,
+body.dashboard-page .sidebar-nav .menu-item.active,
+body.dashboard-page #sidebarNav .menu-item:hover,
+body.dashboard-page #sidebarNav .menu-item.active {
   background: rgba(15, 159, 143, 0.18);
   color: white;
 }
-
-.logout-btn,
-.sidebar button.logout-btn {
+body.dashboard-page .logout-btn,
+body.dashboard-page .sidebar button.logout-btn {
   width: 100%;
   margin-top: 0.25rem;
   background: rgba(239, 68, 68, 0.14);
@@ -2110,13 +2144,11 @@ body {
   border: 1px solid rgba(248, 113, 113, 0.24);
   border-radius: 12px;
 }
-
-.logout-btn:hover,
-.sidebar button.logout-btn:hover {
+body.dashboard-page .logout-btn:hover,
+body.dashboard-page .sidebar button.logout-btn:hover {
   background: rgba(220, 38, 38, 0.28);
 }
-
-.main {
+body.dashboard-page .main {
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -2125,50 +2157,43 @@ body {
   backdrop-filter: none;
   padding: 1.25rem;
 }
-
 @media (min-width: 768px) {
-  .sidebar {
+  body.dashboard-page .sidebar {
     position: sticky;
     top: 0;
     width: 272px;
   }
-
-  .main {
+  body.dashboard-page .main {
     padding: 1.75rem;
   }
 }
-
 @media (min-width: 1200px) {
-  .main {
+  body.dashboard-page .main {
     padding: 2rem 2.5rem;
   }
 }
-
-.topbar,
-.dashboard-heading,
-.overview-card,
-.stat-card,
-.tabla-container,
-.filtros-container,
-.chart-wrapper,
-#calendarioCitas {
+body.dashboard-page .topbar,
+body.dashboard-page .dashboard-heading,
+body.dashboard-page .overview-card,
+body.dashboard-page .stat-card,
+body.dashboard-page .tabla-container,
+body.dashboard-page .filtros-container,
+body.dashboard-page .chart-wrapper,
+body.dashboard-page #calendarioCitas {
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
 }
-
-.topbar,
-.dashboard-heading {
+body.dashboard-page .topbar,
+body.dashboard-page .dashboard-heading {
   border-radius: 20px;
 }
-
-.topbar {
+body.dashboard-page .topbar {
   align-items: stretch;
   padding: 1.15rem;
 }
-
-.eyebrow,
-.small-label {
+body.dashboard-page .eyebrow,
+body.dashboard-page .small-label {
   display: inline-block;
   margin-bottom: 0.35rem;
   color: var(--primary-dark);
@@ -2177,60 +2202,52 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-
-.topbar h1,
-.dashboard-heading h2 {
+body.dashboard-page .topbar h1,
+body.dashboard-page .dashboard-heading h2 {
   color: var(--ink);
   letter-spacing: 0;
 }
-
-.topbar #buscador {
+body.dashboard-page .topbar #buscador {
   max-width: none;
   border-radius: 14px;
   background: var(--surface-soft);
   color: var(--ink);
 }
-
-.dashboard-heading {
+body.dashboard-page .dashboard-heading {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   padding: 1.25rem;
 }
-
-.dashboard-heading .subtext {
+body.dashboard-page .dashboard-heading .subtext {
   color: var(--muted);
 }
-
-.overview-cards,
-.estadisticas-container {
+body.dashboard-page .overview-cards,
+body.dashboard-page .estadisticas-container {
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
 }
-
-.stats-insights,
-.citas-summary,
-.clinical-workbench,
-.role-summary {
+body.dashboard-page .stats-insights,
+body.dashboard-page .citas-summary,
+body.dashboard-page .clinical-workbench,
+body.dashboard-page .role-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   margin: 1rem 0 1.5rem;
 }
-
-.stats-insights article,
-.citas-summary article,
-.clinical-workbench article,
-.role-summary article {
+body.dashboard-page .stats-insights article,
+body.dashboard-page .citas-summary article,
+body.dashboard-page .clinical-workbench article,
+body.dashboard-page .role-summary article {
   padding: 1rem 1.15rem;
   border-radius: 16px;
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
-
-.stats-insights span,
-.citas-summary span,
-.clinical-workbench span,
-.role-summary span {
+body.dashboard-page .stats-insights span,
+body.dashboard-page .citas-summary span,
+body.dashboard-page .clinical-workbench span,
+body.dashboard-page .role-summary span {
   display: block;
   margin-bottom: 0.35rem;
   color: var(--muted);
@@ -2239,73 +2256,63 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-
-.stats-insights strong,
-.citas-summary strong,
-.clinical-workbench strong,
-.role-summary strong {
+body.dashboard-page .stats-insights strong,
+body.dashboard-page .citas-summary strong,
+body.dashboard-page .clinical-workbench strong,
+body.dashboard-page .role-summary strong {
   display: block;
   color: var(--ink);
   font-size: 1.45rem;
   line-height: 1.15;
 }
-
-.clinical-workbench small {
+body.dashboard-page .clinical-workbench small {
   display: block;
   margin-top: 0.35rem;
   color: var(--muted);
 }
-
-.overview-card,
-.stat-card {
+body.dashboard-page .overview-card,
+body.dashboard-page .stat-card {
   border-radius: 18px;
 }
-
-.overview-card strong,
-.stat-card .stat-number {
+body.dashboard-page .overview-card strong,
+body.dashboard-page .stat-card .stat-number {
   color: var(--ink);
   font-size: clamp(1.35rem, 2vw, 1.9rem);
 }
-
-.tabs {
+body.dashboard-page .tabs {
   gap: 0.55rem;
   padding: 0.35rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.62);
   border: 1px solid var(--line);
 }
-
-.tab-btn {
+body.dashboard-page .tab-btn {
   border: 0;
   border-radius: 12px;
   background: transparent;
   color: var(--muted);
   white-space: nowrap;
 }
-
-.tab-btn.active,
-.tab-btn:hover {
+body.dashboard-page .tab-btn.active,
+body.dashboard-page .tab-btn:hover {
   background: var(--surface);
   color: var(--ink);
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
-
-.btn,
-.btn-primary,
-.btn-danger,
-.btn-warning,
-.btn-accent,
-.btn-secondary {
+body.dashboard-page .btn,
+body.dashboard-page .btn-primary,
+body.dashboard-page .btn-danger,
+body.dashboard-page .btn-warning,
+body.dashboard-page .btn-accent,
+body.dashboard-page .btn-secondary {
   min-height: 42px;
   border-radius: 12px;
 }
-
-.btn-primary {
+body.dashboard-page .btn-primary {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
 }
-
-.btn-secondary {
+body.dashboard-page .btn-secondary {
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--line);
   background: #e2e8f0;
@@ -2313,132 +2320,110 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
-
-.btn-secondary:hover {
+body.dashboard-page .btn-secondary:hover {
   background: #cbd5e1;
   transform: translateY(-2px);
 }
-
-.tabla-container {
+body.dashboard-page .tabla-container {
   border-radius: 18px;
 }
-
-table {
+body.dashboard-page table {
   background: var(--surface);
 }
-
-th {
+body.dashboard-page th {
   background: #eaf4f6;
   color: var(--ink);
 }
-
-td {
+body.dashboard-page td {
   color: #334155;
 }
-
-tr:hover {
+body.dashboard-page tr:hover {
   background: rgba(15, 159, 143, 0.08);
 }
-
-td button {
+body.dashboard-page td button {
   color: white;
   font-weight: 700;
 }
-
-.filtros-container,
-.chart-wrapper,
-#calendarioCitas {
+body.dashboard-page .filtros-container,
+body.dashboard-page .chart-wrapper,
+body.dashboard-page #calendarioCitas {
   border-radius: 18px;
 }
-
-.chart-wrapper {
+body.dashboard-page .chart-wrapper {
   min-height: 320px;
 }
-
-.chart-bars {
+body.dashboard-page .chart-bars {
   display: flex;
   flex-direction: column;
   gap: 0.95rem;
   margin-top: 1.25rem;
 }
-
-.bar-item {
+body.dashboard-page .bar-item {
   display: grid;
   grid-template-columns: minmax(95px, 0.8fr) minmax(120px, 2fr) minmax(74px, auto);
   align-items: center;
   gap: 0.75rem;
 }
-
-.bar-label {
+body.dashboard-page .bar-label {
   color: #334155;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.bar-container {
+body.dashboard-page .bar-container {
   height: 12px;
   overflow: hidden;
   border-radius: 999px;
   background: #e2e8f0;
 }
-
-.bar-fill {
+body.dashboard-page .bar-fill {
   height: 100%;
   min-width: 4px;
   border-radius: inherit;
   transition: width 0.3s ease;
 }
-
-.bar-value {
+body.dashboard-page .bar-value {
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 800;
   text-align: right;
 }
-
-.filtros-container h3,
-.chart-wrapper h3 {
+body.dashboard-page .filtros-container h3,
+body.dashboard-page .chart-wrapper h3 {
   color: var(--ink);
 }
-
-label,
-.filtros-grid label {
+body.dashboard-page label,
+body.dashboard-page .filtros-grid label {
   color: #475569;
 }
-
-input,
-textarea,
-select,
-.filtros-grid input,
-.filtros-grid select {
+body.dashboard-page input,
+body.dashboard-page textarea,
+body.dashboard-page select,
+body.dashboard-page .filtros-grid input,
+body.dashboard-page .filtros-grid select {
   background: var(--surface-soft);
   color: var(--ink);
   border: 1px solid var(--line);
 }
-
-input:focus,
-textarea:focus,
-select:focus,
-.filtros-grid input:focus,
-.filtros-grid select:focus {
+body.dashboard-page input:focus,
+body.dashboard-page textarea:focus,
+body.dashboard-page select:focus,
+body.dashboard-page .filtros-grid input:focus,
+body.dashboard-page .filtros-grid select:focus {
   background: white;
   border-color: var(--primary);
 }
-
-input::placeholder,
-textarea::placeholder,
-select::placeholder,
-.filtros-grid input::placeholder {
+body.dashboard-page input::placeholder,
+body.dashboard-page textarea::placeholder,
+body.dashboard-page select::placeholder,
+body.dashboard-page .filtros-grid input::placeholder {
   color: #94a3b8;
 }
-
-.citas-list {
+body.dashboard-page .citas-list {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
-
-.citas-toolbar {
+body.dashboard-page .citas-toolbar {
   display: grid;
   grid-template-columns: auto minmax(220px, 1fr) minmax(150px, 0.45fr) minmax(150px, 0.45fr) auto;
   gap: 0.75rem;
@@ -2450,9 +2435,8 @@ select::placeholder,
   border: 1px solid var(--line);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
-
-.patient-tools,
-.admin-toolbar {
+body.dashboard-page .patient-tools,
+body.dashboard-page .admin-toolbar {
   display: grid;
   grid-template-columns: minmax(180px, 0.4fr) minmax(180px, 0.4fr) auto;
   gap: 0.75rem;
@@ -2464,36 +2448,30 @@ select::placeholder,
   border: 1px solid var(--line);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
-
-.admin-toolbar {
+body.dashboard-page .admin-toolbar {
   grid-template-columns: auto minmax(220px, 1fr) minmax(180px, 0.4fr);
 }
-
-.patient-tools select,
-.admin-toolbar input,
-.admin-toolbar select {
+body.dashboard-page .patient-tools select,
+body.dashboard-page .admin-toolbar input,
+body.dashboard-page .admin-toolbar select {
   width: 100%;
   min-height: 42px;
 }
-
-.patient-cell {
+body.dashboard-page .patient-cell {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
 }
-
-.patient-cell strong {
+body.dashboard-page .patient-cell strong {
   color: var(--ink);
 }
-
-.patient-cell span {
+body.dashboard-page .patient-cell span {
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
 }
-
-.patient-status {
+body.dashboard-page .patient-status {
   display: inline-flex;
   max-width: 220px;
   padding: 0.28rem 0.6rem;
@@ -2505,65 +2483,54 @@ select::placeholder,
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.patient-status.status-estable {
+body.dashboard-page .patient-status.status-estable {
   background: rgba(15, 159, 143, 0.14);
   color: var(--primary-dark);
 }
-
-.patient-status.status-seguimiento {
+body.dashboard-page .patient-status.status-seguimiento {
   background: rgba(217, 119, 6, 0.16);
   color: var(--warning);
 }
-
-.patient-status.status-pendiente {
+body.dashboard-page .patient-status.status-pendiente {
   background: rgba(220, 38, 38, 0.12);
   color: var(--danger);
 }
-
-.table-actions {
+body.dashboard-page .table-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
 }
-
-.table-actions button {
+body.dashboard-page .table-actions button {
   margin: 0;
   background: var(--accent);
   color: white;
   font-weight: 800;
 }
-
-.table-actions button:nth-child(2) {
+body.dashboard-page .table-actions button:nth-child(2) {
   background: var(--danger);
 }
-
-.table-actions button:nth-child(3) {
+body.dashboard-page .table-actions button:nth-child(3) {
   background: var(--primary);
 }
-
-.table-empty {
+body.dashboard-page .table-empty {
   padding: 2rem !important;
   color: var(--muted);
   text-align: center;
   font-weight: 800;
 }
-
-.historial-summary {
+body.dashboard-page .historial-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 0.75rem;
   margin: 1rem 0;
 }
-
-.historial-summary article {
+body.dashboard-page .historial-summary article {
   padding: 0.85rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.historial-summary span {
+body.dashboard-page .historial-summary span {
   display: block;
   margin-bottom: 0.25rem;
   color: #93a4b8;
@@ -2571,13 +2538,11 @@ select::placeholder,
   font-weight: 800;
   text-transform: uppercase;
 }
-
-.historial-summary strong {
+body.dashboard-page .historial-summary strong {
   color: white;
   font-size: 0.98rem;
 }
-
-.card-historial {
+body.dashboard-page .card-historial {
   display: grid;
   grid-template-columns: 110px minmax(0, 1fr);
   gap: 1rem;
@@ -2586,79 +2551,65 @@ select::placeholder,
   border-left: 4px solid var(--primary);
   border-radius: 16px;
 }
-
-.historial-date {
+body.dashboard-page .historial-date {
   color: #7dd3fc;
   font-weight: 900;
 }
-
-.historial-body strong {
+body.dashboard-page .historial-body strong {
   color: white;
 }
-
-.historial-body p {
+body.dashboard-page .historial-body p {
   margin: 0.35rem 0 0;
   color: #cbd5e1;
 }
-
-.historial-body span {
+body.dashboard-page .historial-body span {
   color: #93a4b8;
   font-weight: 800;
 }
-
-.role-panel {
+body.dashboard-page .role-panel {
   margin-bottom: 1rem;
 }
-
-.role-panel article {
+body.dashboard-page .role-panel article {
   padding: 1.15rem;
   border-radius: 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
-
-.role-panel h3 {
+body.dashboard-page .role-panel h3 {
   margin-bottom: 1rem;
   color: var(--ink);
   font-size: 1.1rem;
 }
-
-.permission-grid {
+body.dashboard-page .permission-grid {
   display: grid;
   grid-template-columns: minmax(110px, 1fr) repeat(3, minmax(100px, 1fr));
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
 }
-
-.permission-grid > * {
+body.dashboard-page .permission-grid > * {
   padding: 0.75rem;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   color: #334155;
 }
-
-.permission-grid > :nth-child(4n) {
+body.dashboard-page .permission-grid > :nth-child(4n) {
   border-right: 0;
 }
-
-.permission-grid strong {
+body.dashboard-page .permission-grid strong {
   background: #eaf4f6;
   color: var(--ink);
 }
-
-.permission-grid b {
+body.dashboard-page .permission-grid b {
   color: var(--primary-dark);
 }
-
-.citas-toolbar input,
-.citas-toolbar select {
+body.dashboard-page .citas-toolbar input,
+body.dashboard-page .citas-toolbar select {
   width: 100%;
   min-height: 42px;
 }
-
-.cita-item {
+body.dashboard-page .cita-item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -2670,48 +2621,39 @@ select::placeholder,
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
   color: #334155;
 }
-
-.cita-item.estado-hoy {
+body.dashboard-page .cita-item.estado-hoy {
   border-left: 4px solid var(--warning);
 }
-
-.cita-item.estado-proximas {
+body.dashboard-page .cita-item.estado-proximas {
   border-left: 4px solid var(--primary);
 }
-
-.cita-item.estado-vencidas {
+body.dashboard-page .cita-item.estado-vencidas {
   border-left: 4px solid var(--danger);
 }
-
-.cita-main {
+body.dashboard-page .cita-main {
   flex: 1;
   min-width: 0;
 }
-
-.cita-main p {
+body.dashboard-page .cita-main p {
   margin: 0.3rem 0 0;
   color: var(--muted);
 }
-
-.cita-row {
+body.dashboard-page .cita-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
 }
-
-.cita-item strong {
+body.dashboard-page .cita-item strong {
   color: var(--ink);
 }
-
-.cita-actions {
+body.dashboard-page .cita-actions {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
-
-.cita-actions button {
+body.dashboard-page .cita-actions button {
   padding: 0.45rem 0.75rem;
   border: 0;
   border-radius: 10px;
@@ -2720,27 +2662,22 @@ select::placeholder,
   cursor: pointer;
   font-weight: 700;
 }
-
-.cita-actions button:last-child {
+body.dashboard-page .cita-actions button:last-child {
   background: var(--danger);
 }
-
-.cita-status.status-hoy {
+body.dashboard-page .cita-status.status-hoy {
   background: rgba(217, 119, 6, 0.14);
   color: var(--warning);
 }
-
-.cita-status.status-proximas {
+body.dashboard-page .cita-status.status-proximas {
   background: rgba(15, 159, 143, 0.14);
   color: var(--primary-dark);
 }
-
-.cita-status.status-vencidas {
+body.dashboard-page .cita-status.status-vencidas {
   background: rgba(220, 38, 38, 0.14);
   color: var(--danger);
 }
-
-.empty-state {
+body.dashboard-page .empty-state {
   width: 100%;
   padding: 1.5rem;
   border-radius: 16px;
@@ -2750,60 +2687,49 @@ select::placeholder,
   text-align: center;
   font-weight: 700;
 }
-
-.empty-state.error {
+body.dashboard-page .empty-state.error {
   color: var(--danger);
   border-color: rgba(220, 38, 38, 0.28);
 }
-
-.modal[style*="block"],
-.modal[style*="flex"] {
+body.dashboard-page .modal[style*=block],
+body.dashboard-page .modal[style*=flex] {
   display: flex !important;
 }
-
-.modal-content {
+body.dashboard-page .modal-content {
   background: #10202f;
   border-radius: 18px;
 }
-
-.fc {
+body.dashboard-page .fc {
   color: var(--ink);
 }
-
-.fc .fc-toolbar-title,
-.fc .fc-daygrid-body .fc-daygrid-day-number,
-.fc .fc-col-header .fc-col-header-cell {
+body.dashboard-page .fc .fc-toolbar-title,
+body.dashboard-page .fc .fc-daygrid-body .fc-daygrid-day-number,
+body.dashboard-page .fc .fc-col-header .fc-col-header-cell {
   color: var(--ink);
 }
-
-.fc .fc-daygrid-day {
+body.dashboard-page .fc .fc-daygrid-day {
   background: white;
   border-color: var(--line);
 }
-
 @media (min-width: 768px) {
-  .topbar {
+  body.dashboard-page .topbar {
     align-items: center;
     padding: 1.25rem 1.5rem;
   }
-
-  .topbar #buscador {
+  body.dashboard-page .topbar #buscador {
     flex-basis: 360px;
   }
-
-  .dashboard-heading {
+  body.dashboard-page .dashboard-heading {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     padding: 1.5rem;
   }
 }
-
 @media (max-width: 767px) {
-  .container {
+  body.dashboard-page .container {
     display: block;
   }
-
-  .sidebar {
+  body.dashboard-page .sidebar {
     min-height: auto;
     position: fixed;
     inset: 0 auto auto 0;
@@ -2813,97 +2739,433 @@ select::placeholder,
     align-items: center;
     padding: 0.75rem 1rem;
   }
-
-  .brand small,
-  .sidebar-nav,
-  .account-nav,
-  .logout-btn {
+  body.dashboard-page .brand small,
+  body.dashboard-page .sidebar-nav,
+  body.dashboard-page .account-nav,
+  body.dashboard-page .logout-btn {
     display: none;
   }
-
-  .menu-toggle {
+  body.dashboard-page .menu-toggle {
     display: inline-flex;
     margin-left: auto;
     align-items: center;
     justify-content: center;
   }
-
-  .sidebar.menu-open {
+  body.dashboard-page .sidebar.menu-open {
     width: min(88vw, 320px);
     height: 100vh;
     align-items: stretch;
   }
-
-  .sidebar.menu-open .sidebar-nav,
-  .sidebar.menu-open .account-nav,
-  .sidebar.menu-open .logout-btn {
+  body.dashboard-page .sidebar.menu-open .sidebar-nav,
+  body.dashboard-page .sidebar.menu-open .account-nav,
+  body.dashboard-page .sidebar.menu-open .logout-btn {
     display: flex;
   }
-
-  .main {
+  body.dashboard-page .main {
     margin-top: 76px;
     padding: 1rem;
   }
-
-  .topbar,
-  .dashboard-heading,
-  .overview-card,
-  .stat-card,
-  .filtros-container,
-  .chart-wrapper,
-  #calendarioCitas {
+  body.dashboard-page .topbar,
+  body.dashboard-page .dashboard-heading,
+  body.dashboard-page .overview-card,
+  body.dashboard-page .stat-card,
+  body.dashboard-page .filtros-container,
+  body.dashboard-page .chart-wrapper,
+  body.dashboard-page #calendarioCitas {
     border-radius: 16px;
   }
-
-  .acciones {
+  body.dashboard-page .acciones {
     gap: 0.65rem;
   }
-
-  .tabs {
+  body.dashboard-page .tabs {
     overflow-x: auto;
   }
-
-  .cita-item {
+  body.dashboard-page .cita-item {
     flex-direction: column;
   }
-
-  .citas-toolbar {
+  body.dashboard-page .citas-toolbar {
     grid-template-columns: 1fr;
   }
-
-  .patient-tools,
-  .admin-toolbar {
+  body.dashboard-page .patient-tools,
+  body.dashboard-page .admin-toolbar {
     grid-template-columns: 1fr;
   }
-
-  .card-historial {
+  body.dashboard-page .card-historial {
     grid-template-columns: 1fr;
   }
-
-  .permission-grid {
+  body.dashboard-page .permission-grid {
     min-width: 560px;
   }
-
-  .role-panel {
+  body.dashboard-page .role-panel {
     overflow-x: auto;
   }
-
-  .bar-item {
+  body.dashboard-page .bar-item {
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
-
-  .bar-value {
+  body.dashboard-page .bar-value {
     text-align: left;
   }
-
-  .cita-actions {
+  body.dashboard-page .cita-actions {
     width: 100%;
     justify-content: stretch;
   }
-
-  .cita-actions button {
+  body.dashboard-page .cita-actions button {
     flex: 1;
+  }
+}
+body.dashboard-page {
+  /* Dashboard responsive refinements */
+}
+body.dashboard-page .container,
+body.dashboard-page .main,
+body.dashboard-page .tab-content,
+body.dashboard-page .topbar,
+body.dashboard-page .dashboard-heading,
+body.dashboard-page .overview-cards,
+body.dashboard-page .clinical-workbench,
+body.dashboard-page .estadisticas-container,
+body.dashboard-page .stats-insights,
+body.dashboard-page .citas-summary,
+body.dashboard-page .charts-container,
+body.dashboard-page .citas-container,
+body.dashboard-page .patient-tools,
+body.dashboard-page .citas-toolbar,
+body.dashboard-page .filtros-container {
+  min-width: 0;
+}
+body.dashboard-page .main {
+  width: 100%;
+}
+body.dashboard-page .topbar,
+body.dashboard-page .dashboard-heading,
+body.dashboard-page .patient-tools,
+body.dashboard-page .citas-toolbar,
+body.dashboard-page .acciones {
+  container-type: inline-size;
+}
+body.dashboard-page .topbar h1,
+body.dashboard-page .dashboard-heading h2,
+body.dashboard-page .overview-card strong,
+body.dashboard-page .stat-card .stat-number,
+body.dashboard-page .stats-insights strong,
+body.dashboard-page .citas-summary strong,
+body.dashboard-page .clinical-workbench strong {
+  overflow-wrap: anywhere;
+}
+body.dashboard-page .tabla-container {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+body.dashboard-page .tabla-container table {
+  min-width: 720px;
+}
+body.dashboard-page #calendarioCitas,
+body.dashboard-page .fc {
+  max-width: 100%;
+  overflow-x: auto;
+}
+body.dashboard-page .fc .fc-toolbar {
+  gap: 0.5rem;
+}
+body.dashboard-page .fc .fc-toolbar-title {
+  font-size: clamp(1rem, 2vw, 1.45rem);
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  body.dashboard-page .sidebar {
+    width: 232px;
+    padding: 1.25rem 1rem;
+  }
+  body.dashboard-page .brand {
+    gap: 0.65rem;
+  }
+  body.dashboard-page .brand-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 1.45rem;
+  }
+  body.dashboard-page .brand h2,
+  body.dashboard-page .sidebar h2 {
+    font-size: 1rem;
+  }
+  body.dashboard-page .main {
+    padding: 1.25rem;
+  }
+  body.dashboard-page .topbar,
+  body.dashboard-page .dashboard-heading {
+    padding: 1.15rem;
+  }
+  body.dashboard-page .overview-cards,
+  body.dashboard-page .estadisticas-container,
+  body.dashboard-page .stats-insights,
+  body.dashboard-page .citas-summary,
+  body.dashboard-page .clinical-workbench {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.dashboard-page .citas-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.dashboard-page .citas-toolbar .btn-primary,
+  body.dashboard-page .citas-toolbar .btn-secondary {
+    width: 100%;
+  }
+  body.dashboard-page .patient-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.dashboard-page .patient-tools .btn-secondary {
+    grid-column: 1/-1;
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  body.dashboard-page {
+    overflow-x: hidden;
+  }
+  body.dashboard-page .sidebar {
+    min-height: 68px;
+    max-width: 100vw;
+  }
+  body.dashboard-page .sidebar.menu-open {
+    overflow-y: auto;
+  }
+  body.dashboard-page .brand {
+    min-width: 0;
+  }
+  body.dashboard-page .brand h2,
+  body.dashboard-page .sidebar h2 {
+    max-width: 58vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  body.dashboard-page .main {
+    margin-top: 68px;
+    padding: 0.75rem;
+  }
+  body.dashboard-page .topbar,
+  body.dashboard-page .dashboard-heading,
+  body.dashboard-page .filtros-container,
+  body.dashboard-page .chart-wrapper,
+  body.dashboard-page #calendarioCitas,
+  body.dashboard-page .patient-tools,
+  body.dashboard-page .citas-toolbar {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+  body.dashboard-page .topbar {
+    gap: 0.8rem;
+  }
+  body.dashboard-page .topbar h1 {
+    font-size: 1.35rem;
+  }
+  body.dashboard-page .dashboard-heading h2 {
+    font-size: 1.35rem;
+  }
+  body.dashboard-page .dashboard-heading .subtext {
+    font-size: 0.92rem;
+  }
+  body.dashboard-page .action-buttons,
+  body.dashboard-page .action-buttons .btn-primary,
+  body.dashboard-page .topbar #buscador {
+    width: 100%;
+  }
+  body.dashboard-page .overview-cards,
+  body.dashboard-page .estadisticas-container,
+  body.dashboard-page .stats-insights,
+  body.dashboard-page .citas-summary,
+  body.dashboard-page .clinical-workbench,
+  body.dashboard-page .charts-container,
+  body.dashboard-page .citas-container,
+  body.dashboard-page .citas-list,
+  body.dashboard-page .filtros-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  body.dashboard-page .overview-card,
+  body.dashboard-page .stat-card,
+  body.dashboard-page .stats-insights article,
+  body.dashboard-page .citas-summary article,
+  body.dashboard-page .clinical-workbench article {
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
+  body.dashboard-page .acciones,
+  body.dashboard-page .patient-tools,
+  body.dashboard-page .citas-toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  body.dashboard-page .acciones button,
+  body.dashboard-page .patient-tools button,
+  body.dashboard-page .patient-tools select,
+  body.dashboard-page .citas-toolbar button,
+  body.dashboard-page .citas-toolbar input,
+  body.dashboard-page .citas-toolbar select {
+    width: 100%;
+  }
+  body.dashboard-page .tabla-container {
+    border-radius: 14px;
+  }
+  body.dashboard-page .tabla-container table {
+    min-width: 680px;
+  }
+  body.dashboard-page th,
+  body.dashboard-page td {
+    padding: 0.65rem 0.55rem;
+  }
+  body.dashboard-page .table-actions {
+    flex-wrap: nowrap;
+  }
+  body.dashboard-page .table-actions button,
+  body.dashboard-page td button {
+    min-width: 34px;
+    padding: 0.4rem 0.55rem;
+  }
+  body.dashboard-page .modal {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+  body.dashboard-page .modal-content {
+    max-height: none;
+    margin: 0.75rem 0;
+  }
+  body.dashboard-page .fc .fc-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  body.dashboard-page .fc .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+  }
+  body.dashboard-page .fc .fc-button {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.78rem;
+  }
+  body.dashboard-page .fc .fc-daygrid-day-frame {
+    min-height: 56px;
+  }
+  body.dashboard-page .fc .fc-daygrid-event {
+    white-space: normal;
+  }
+}
+@media (max-width: 480px) {
+  body.dashboard-page .main {
+    padding: 0.6rem;
+  }
+  body.dashboard-page .brand-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.35rem;
+  }
+  body.dashboard-page .brand h2,
+  body.dashboard-page .sidebar h2 {
+    max-width: 52vw;
+    font-size: 0.95rem;
+  }
+  body.dashboard-page .topbar h1,
+  body.dashboard-page .dashboard-heading h2 {
+    font-size: 1.2rem;
+  }
+  body.dashboard-page .eyebrow,
+  body.dashboard-page .small-label,
+  body.dashboard-page .stats-insights span,
+  body.dashboard-page .citas-summary span,
+  body.dashboard-page .clinical-workbench span {
+    font-size: 0.68rem;
+  }
+  body.dashboard-page .tabla-container table {
+    min-width: 620px;
+  }
+  body.dashboard-page .cita-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+body.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: radial-gradient(circle at 18% 16%, rgba(16, 185, 129, 0.24), transparent 30%), radial-gradient(circle at 88% 4%, rgba(59, 130, 246, 0.18), transparent 26%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  overflow-x: hidden;
+}
+body.auth-page .login-box {
+  width: min(100%, 420px);
+  max-height: calc(100vh - 2rem);
+  margin: 0;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+  overflow-y: auto;
+}
+body.auth-page .login-box h2 {
+  color: white;
+}
+body.auth-page .auth-tabs {
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: visible;
+}
+body.auth-page .tab-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.9rem;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+}
+body.auth-page .tab-btn.active,
+body.auth-page .tab-btn:hover {
+  background: rgba(16, 185, 129, 0.18);
+  color: white;
+  transform: none;
+}
+body.auth-page .tab-content.active {
+  display: block;
+}
+body.auth-page .login-box input,
+body.auth-page .login-box select {
+  margin-bottom: 0.85rem;
+}
+body.auth-page .login-box button {
+  margin: 0;
+}
+body.auth-page #mensaje {
+  min-height: 1.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  body.auth-page {
+    align-items: flex-start;
+    padding: 0.75rem;
+  }
+  body.auth-page .login-box {
+    max-height: none;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+  body.auth-page .auth-tabs {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  body.auth-page .tab-btn,
+  body.auth-page .login-box input,
+  body.auth-page .login-box select,
+  body.auth-page .login-box button {
+    min-height: 44px;
+    font-size: 0.95rem;
   }
 }
 

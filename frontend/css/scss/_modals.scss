@@ -11,8 +11,10 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
-  @include flex-center;
+  align-items: center;
+  justify-content: center;
   padding: spacing(lg);
+  overflow-y: auto;
   z-index: 1000;
 
   &.active {
@@ -24,6 +26,8 @@
   background: map-get($backgrounds, modal);
   width: 100%;
   max-width: 500px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   padding: spacing(2xl);
   border-radius: radius(3xl);
   box-shadow: shadow(lg);
@@ -83,6 +87,7 @@
   @include media-mobile {
     margin: spacing(sm);
     padding: spacing(xl);
+    max-height: none;
 
     h2 {
       font-size: font-size(lg);
@@ -173,7 +178,7 @@
   backdrop-filter: blur(10px);
   padding: spacing(2xl);
   border-radius: radius(3xl);
-  width: 100%;
+  width: min(100%, 400px);
   max-width: 400px;
   margin: spacing(2xl) auto;
   text-align: center;
@@ -187,7 +192,7 @@
   }
 
   @include media-mobile {
-    margin: spacing(lg);
+    margin: spacing(lg) auto;
     padding: spacing(xl);
 
     h2 {
@@ -196,7 +201,7 @@
   }
 
   @include media-small-mobile {
-    margin: spacing(sm);
+    margin: spacing(sm) auto;
     padding: spacing(lg);
 
     h2 {

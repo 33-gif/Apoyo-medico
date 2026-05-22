@@ -6,37 +6,37 @@
 <title>Login Clínica</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="auth-page">
 
 <div class="login-box">
 <h2>🏥 Sistema Clínico</h2>
 
-<div class="tabs" style="justify-content: center; border-bottom: 2px solid rgba(255,255,255,0.2); margin-bottom: 1.5rem;">
-  <button class="tab-btn active" onclick="switchTab('login-form')" style="border-bottom: 3px solid #7dd3fc; padding: 0.5rem 1rem;">Iniciar Sesión</button>
-  <button class="tab-btn" onclick="switchTab('register-form')" style="border-bottom: 3px solid transparent; padding: 0.5rem 1rem;">Registrarse</button>
+<div class="tabs auth-tabs">
+  <button class="tab-btn active" onclick="switchTab('login-form')">Iniciar Sesión</button>
+  <button class="tab-btn" onclick="switchTab('register-form')">Registrarse</button>
 </div>
 
 <!-- LOGIN TAB -->
 <div id="login-form" class="tab-content active">
-  <input type="email" id="email" placeholder="Correo" style="margin-bottom: 0.75rem;">
-  <input type="password" id="password" placeholder="Contraseña" style="margin-bottom: 1rem;">
-  <button onclick="iniciarSesion()" style="width: 100%;">Ingresar</button>
+  <input type="email" id="email" placeholder="Correo">
+  <input type="password" id="password" placeholder="Contraseña">
+  <button onclick="iniciarSesion()">Ingresar</button>
 </div>
 
 <!-- REGISTER TAB -->
 <div id="register-form" class="tab-content" style="display: none;">
-  <input type="text" id="nombre-reg" placeholder="Nombre completo" style="margin-bottom: 0.75rem;">
-  <input type="email" id="email-reg" placeholder="Correo" style="margin-bottom: 0.75rem;">
-  <input type="password" id="password-reg" placeholder="Contraseña" style="margin-bottom: 0.75rem;">
-  <select id="rol-reg" style="margin-bottom: 1rem;">
+  <input type="text" id="nombre-reg" placeholder="Nombre completo">
+  <input type="email" id="email-reg" placeholder="Correo">
+  <input type="password" id="password-reg" placeholder="Contraseña">
+  <select id="rol-reg">
     <option value="recepcionista">Recepcionista</option>
     <option value="doctor">Doctor</option>
     <option value="admin">Admin</option>
   </select>
-  <button onclick="registrarse()" style="width: 100%;">Crear Cuenta</button>
+  <button onclick="registrarse()">Crear Cuenta</button>
 </div>
 
-<p id="mensaje" style="margin-top: 1rem; text-align: center;"></p>
+<p id="mensaje"></p>
 </div>
 
 <script src="services/authService.js"></script>
@@ -59,9 +59,9 @@
     // Update tab buttons
     document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
       if ((idx === 0 && tabName === 'login-form') || (idx === 1 && tabName === 'register-form')) {
-        btn.style.borderBottom = '3px solid #7dd3fc';
+        btn.classList.add('active');
       } else {
-        btn.style.borderBottom = '3px solid transparent';
+        btn.classList.remove('active');
       }
     });
   }

@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 </head>
  
-<body>
+<body class="dashboard-page">
  
 <div class="container">
  
@@ -70,14 +70,6 @@
       </article>
     </section>
 
-    <!-- TABS DE NAVEGACIÓN -->
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="pacientes" onclick="switchTab('pacientes', event)">Pacientes</button>
-      <button class="tab-btn" data-tab="estadisticas" onclick="switchTab('estadisticas', event)">Estadísticas</button>
-      <button class="tab-btn" data-tab="citas" onclick="switchTab('citas', event)">Citas</button>
-      <button class="tab-btn" data-tab="busqueda" onclick="switchTab('busqueda', event)">Búsqueda avanzada</button>
-    </div>
- 
     <!-- TAB: PACIENTES -->
     <div id="tab-pacientes" class="tab-content active">
       <section class="clinical-workbench" aria-label="Vista clínica de pacientes">
@@ -117,12 +109,6 @@
         <button class="btn-primary" onclick="abrirFormulario()">
           Nuevo paciente
         </button>
-        <!-- CORREGIDO: antes llamaba a mostrarCitas() que colisiona con la función
-             de renderizado en citas.js. Ahora cambia al tab de citas correctamente. -->
-        <button class="btn-primary" onclick="switchTab('citas')">
-          Ver citas
-        </button>
- 
         <button class="btn-primary" onclick="exportarPacientes()">
           Exportar Excel
         </button>
