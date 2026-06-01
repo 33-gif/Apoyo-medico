@@ -40,10 +40,24 @@ h6 { font-size: font-size(lg); }
 a {
   color: color(primary);
   text-decoration: none;
-  transition: map-get($transitions, fast);
+  // Limitar la transición únicamente al color para reducir trabajo del navegador
+  transition: color 0.2s ease;
 
   &:hover {
     color: color(primary-dark);
+  }
+
+  // Accesibilidad: mostrar el contorno de foco cuando el enlace reciba foco
+  &:focus,
+  &:focus-visible {
+    @include focus-outline;
+  }
+}
+
+// Respetar la preferencia del usuario por movimientos reducidos
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none !important;
   }
 }
 

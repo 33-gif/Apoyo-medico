@@ -21,7 +21,7 @@ router.put(
 );
 router.delete(
   "/:id",
-  requireRole(roles.ADMIN),
+  requireRole(roles.ADMIN, roles.DOCTOR, roles.RECEPCIONISTA),
   citasController.eliminarCita
 );
 

@@ -37,7 +37,8 @@ CREATE TABLE usuarios (
   nombre VARCHAR(100),
   email VARCHAR(100) UNIQUE,
   password VARCHAR(255),
-  rol VARCHAR(50)
+  rol VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE pacientes (

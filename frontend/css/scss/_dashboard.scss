@@ -21,6 +21,30 @@ body.dashboard-page {
     var(--page-bg);
   color: var(--ink);
 
+%dashboard-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+%dashboard-soft-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+%dashboard-toolbar {
+  display: grid;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
 .container {
   max-width: none;
   min-height: 100vh;
@@ -94,10 +118,34 @@ body.dashboard-page {
 .sidebar-nav .menu-item,
 .account-nav .menu-item,
 #sidebarNav .menu-item {
+  display: flex;
+  align-items: center;
   margin: 0;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
   border-radius: 12px;
   color: #cbd5e1;
   font-weight: 700;
+}
+
+.menu-toggle,
+.sidebar .menu-toggle {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(15, 159, 143, 0.95);
+  color: white;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.menu-toggle:hover,
+.sidebar .menu-toggle:hover {
+  background: var(--primary-dark);
 }
 
 .sidebar-nav .menu-item:hover,
@@ -111,12 +159,19 @@ body.dashboard-page {
 
 .logout-btn,
 .sidebar button.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
   margin-top: 0.25rem;
   background: rgba(239, 68, 68, 0.14);
   color: #fecaca;
   border: 1px solid rgba(248, 113, 113, 0.24);
   border-radius: 12px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .logout-btn:hover,
@@ -160,9 +215,7 @@ body.dashboard-page {
 .filtros-container,
 .chart-wrapper,
 #calendarioCitas {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  @extend %dashboard-panel;
 }
 
 .topbar,
@@ -230,9 +283,7 @@ body.dashboard-page {
 .role-summary article {
   padding: 1rem 1.15rem;
   border-radius: 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  @extend %dashboard-soft-panel;
 }
 
 .stats-insights span,
@@ -266,13 +317,34 @@ body.dashboard-page {
 
 .overview-card,
 .stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 112px;
+  padding: 1.1rem;
   border-radius: 18px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.overview-card span,
+.stat-card .stat-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .overview-card strong,
 .stat-card .stat-number {
   color: var(--ink);
-  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  max-width: 100%;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .tabs {
@@ -447,30 +519,14 @@ select::placeholder,
 }
 
 .citas-toolbar {
-  display: grid;
+  @extend %dashboard-toolbar;
   grid-template-columns: auto minmax(220px, 1fr) minmax(150px, 0.45fr) minmax(150px, 0.45fr) auto;
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
 .patient-tools,
 .admin-toolbar {
-  display: grid;
+  @extend %dashboard-toolbar;
   grid-template-columns: minmax(180px, 0.4fr) minmax(180px, 0.4fr) auto;
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
 .admin-toolbar {
@@ -621,9 +677,7 @@ select::placeholder,
 .role-panel article {
   padding: 1.15rem;
   border-radius: 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  @extend %dashboard-soft-panel;
 }
 
 .role-panel h3 {
@@ -673,9 +727,7 @@ select::placeholder,
   gap: 1rem;
   padding: 1rem;
   border-radius: 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+  @extend %dashboard-soft-panel;
   color: #334155;
 }
 
@@ -803,115 +855,6 @@ select::placeholder,
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     padding: 1.5rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .container {
-    display: block;
-  }
-
-  .sidebar {
-    min-height: auto;
-    position: fixed;
-    inset: 0 auto auto 0;
-    width: 100%;
-    z-index: 1000;
-    flex-direction: row;
-    align-items: center;
-    padding: 0.75rem 1rem;
-  }
-
-  .brand small,
-  .sidebar-nav,
-  .account-nav,
-  .logout-btn {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: inline-flex;
-    margin-left: auto;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .sidebar.menu-open {
-    width: min(88vw, 320px);
-    height: 100vh;
-    align-items: stretch;
-  }
-
-  .sidebar.menu-open .sidebar-nav,
-  .sidebar.menu-open .account-nav,
-  .sidebar.menu-open .logout-btn {
-    display: flex;
-  }
-
-  .main {
-    margin-top: 76px;
-    padding: 1rem;
-  }
-
-  .topbar,
-  .dashboard-heading,
-  .overview-card,
-  .stat-card,
-  .filtros-container,
-  .chart-wrapper,
-  #calendarioCitas {
-    border-radius: 16px;
-  }
-
-  .acciones {
-    gap: 0.65rem;
-  }
-
-  .tabs {
-    overflow-x: auto;
-  }
-
-  .cita-item {
-    flex-direction: column;
-  }
-
-  .citas-toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-tools,
-  .admin-toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .card-historial {
-    grid-template-columns: 1fr;
-  }
-
-  .permission-grid {
-    min-width: 560px;
-  }
-
-  .role-panel {
-    overflow-x: auto;
-  }
-
-  .bar-item {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-
-  .bar-value {
-    text-align: left;
-  }
-
-  .cita-actions {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .cita-actions button {
-    flex: 1;
   }
 }
 
@@ -1043,13 +986,67 @@ select::placeholder,
     overflow-x: hidden;
   }
 
+  .container {
+    display: block;
+  }
+
   .sidebar {
-    min-height: 68px;
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 1000;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
     max-width: 100vw;
+    min-height: 68px;
+    padding: 0.75rem 1rem;
+  }
+
+  .brand small,
+  .sidebar-nav,
+  .account-nav,
+  .logout-btn {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
   }
 
   .sidebar.menu-open {
+    width: min(88vw, 320px);
+    height: 100vh;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    max-width: 100vw;
     overflow-y: auto;
+  }
+
+  .sidebar.menu-open .brand {
+    width: 100%;
+    padding-right: 3.25rem;
+  }
+
+  .sidebar.menu-open .menu-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin-left: 0;
+  }
+
+  .sidebar.menu-open .sidebar-nav,
+  .sidebar.menu-open .account-nav {
+    display: flex;
+    width: 100%;
+  }
+
+  .sidebar.menu-open .logout-btn {
+    display: flex;
+    width: 100%;
   }
 
   .brand {
@@ -1124,9 +1121,15 @@ select::placeholder,
     border-radius: 14px;
   }
 
+  .overview-card,
+  .stat-card {
+    min-height: 96px;
+  }
+
   .acciones,
   .patient-tools,
-  .citas-toolbar {
+  .citas-toolbar,
+  .admin-toolbar {
     display: grid;
     grid-template-columns: 1fr;
   }
@@ -1171,6 +1174,44 @@ select::placeholder,
   .modal-content {
     max-height: none;
     margin: 0.75rem 0;
+  }
+
+  .tabs {
+    overflow-x: auto;
+  }
+
+  .cita-item {
+    flex-direction: column;
+  }
+
+  .card-historial {
+    grid-template-columns: 1fr;
+  }
+
+  .permission-grid {
+    min-width: 560px;
+  }
+
+  .role-panel {
+    overflow-x: auto;
+  }
+
+  .bar-item {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .bar-value {
+    text-align: left;
+  }
+
+  .cita-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .cita-actions button {
+    flex: 1;
   }
 
   .fc .fc-toolbar {

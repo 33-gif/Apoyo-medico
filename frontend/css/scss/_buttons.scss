@@ -21,11 +21,9 @@
   font-weight: font-weight(semibold);
   cursor: pointer;
   transition: map-get($transitions, default);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
   }
 
   @include media-mobile {
@@ -35,12 +33,10 @@
 
 .btn-danger {
   @include button-gradient(color(danger), color(danger-dark), rgb(239, 68, 68));
-  color: $text;
 
   &:hover {
     background: linear-gradient(135deg, color(danger-dark) 0%, #b91c1c 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
   }
 }
 

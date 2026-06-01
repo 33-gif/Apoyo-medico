@@ -12,28 +12,29 @@
 <h2>🏥 Sistema Clínico</h2>
 
 <div class="tabs auth-tabs">
-  <button class="tab-btn active" onclick="switchTab('login-form')">Iniciar Sesión</button>
-  <button class="tab-btn" onclick="switchTab('register-form')">Registrarse</button>
+  <button type="button" class="tab-btn active" onclick="switchTab('login-form')">Iniciar Sesión</button>
+  <button type="button" class="tab-btn" onclick="switchTab('register-form')">Registrarse</button>
 </div>
 
 <!-- LOGIN TAB -->
 <div id="login-form" class="tab-content active">
   <input type="email" id="email" placeholder="Correo">
   <input type="password" id="password" placeholder="Contraseña">
-  <button onclick="iniciarSesion()">Ingresar</button>
+  <button type="button" onclick="iniciarSesion()">Ingresar</button>
 </div>
 
 <!-- REGISTER TAB -->
-<div id="register-form" class="tab-content" style="display: none;">
+<div id="register-form" class="tab-content">
   <input type="text" id="nombre-reg" placeholder="Nombre completo">
   <input type="email" id="email-reg" placeholder="Correo">
   <input type="password" id="password-reg" placeholder="Contraseña">
+  <label for="rol-reg">Rol</label>
   <select id="rol-reg">
     <option value="recepcionista">Recepcionista</option>
     <option value="doctor">Doctor</option>
     <option value="admin">Admin</option>
   </select>
-  <button onclick="registrarse()">Crear Cuenta</button>
+  <button type="button" onclick="registrarse()">Crear Cuenta</button>
 </div>
 
 <p id="mensaje"></p>
@@ -48,13 +49,13 @@
   });
 
   function switchTab(tabName) {
-    // Hide all tabs
+    // Hide all tabs and remove active state
     document.querySelectorAll('.tab-content').forEach(tab => {
-      tab.style.display = 'none';
+      tab.classList.remove('active');
     });
     
     // Show selected tab
-    document.getElementById(tabName).style.display = 'block';
+    document.getElementById(tabName).classList.add('active');
     
     // Update tab buttons
     document.querySelectorAll('.tab-btn').forEach((btn, idx) => {

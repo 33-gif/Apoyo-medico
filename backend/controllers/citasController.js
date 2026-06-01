@@ -69,7 +69,12 @@ exports.eliminarCita = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await pool.query("DELETE FROM citas WHERE id=$1", [id]);
+    const result = await pool.query("DELETE FROM citas WHERE id=$1 RETURNING id", [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Cita no encontrada" });
+    }
+
     res.json({ mensaje: "Cita eliminada" });
   } catch (error) {
     console.error(error);

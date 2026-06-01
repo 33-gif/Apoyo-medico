@@ -37,7 +37,7 @@ exports.crear = async (req, res) => {
 exports.obtener = async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, nombre, email, rol, created_at FROM usuarios ORDER BY created_at DESC`
+      `SELECT id, nombre, email, rol FROM usuarios ORDER BY id DESC`
     );
 
     res.json(result.rows);
